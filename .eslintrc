@@ -10,6 +10,7 @@
     "@typescript-eslint/ban-types": "off",
     "no-multiple-empty-lines": [2, {"max": 99999, "maxEOF": 0}],
     "space-infix-ops": "off",
+    "better-styled-components/sort-declarations-alphabetically": 2,
     "@typescript-eslint/space-infix-ops": ["error", { "int32Hint": false }],
     "no-empty-function": "off",
     "no-async-promise-executor": ["off"],
@@ -38,5 +39,5 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["prettier", "@typescript-eslint"]
+  "plugins": ["prettier", "@typescript-eslint","better-styled-components"]
 }
