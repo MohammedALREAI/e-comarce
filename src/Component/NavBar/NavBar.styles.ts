@@ -1,59 +1,3 @@
-// import styled from 'styled-components'
-// import SearchIcon from '@material-ui/icons/Search'
-// import { Row, FlexBox, Section, Image, Column } from '../widget/styles'
-
-// export const NavContainer = styled(Row).attrs({
-//     as: 'nav',
-// })`
-
-//     height: 85px;
-//     background: #242424
-//     width:100%
-// `
-
-// export const InnerSection = styled(Column)`
-//   max-width: 1640px;
-//   width:100%;
-//   margin: 0 auto;
-// `
-// export const Logo = styled('img')`
-//     width: 180px;
-//     height: 50px;
-//     opacity: 1;
-//     object-fit: cover;
-// `
-
-// export const SearchInput = styled('input')`
-//     height: 40px;
-//     width: 550px;
-//     background: #ffffff 0% 0% no-repeat padding-box;
-//     border-radius: 6px;
-//     opacity: 1;
-//     border: none;
-//     padding: 12px 26px;
-//     &:focus {
-//         outline: none;
-//         border: none;
-//     }
-// `
-
-// export const SearchButton = styled(FlexBox)`
-//     width: 152px;
-//     height: 40px;
-//     background: #fcdd06;
-//     border-radius: 6px;
-//     opacity: 1;
-//     cursor: pointer;
-// `
-
-// export const StyledSearchIcon = styled(SearchIcon)`
-//     font-size: 18;
-//     margin-right: 10px;
-// `
-
-
-
-
 
 
 
@@ -67,7 +11,6 @@ import styled from 'styled-components'
 import SearchIcon from '@material-ui/icons/Search'
 
 import { FlexBox, Column, Row } from '../widget/styles'
-
 export const InnerSection = styled(Column)`
   margin: 0 auto;
   max-width: 1640px;

@@ -3,11 +3,10 @@ import PersonIcon from '@material-ui/icons/Person'
 import BookmarkIcon from '@material-ui/icons/Bookmark'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import LogoIcon from '../../Assets/Images/logo.png'
-import useTheme from '../../theme/useTheme'
-import { NavContainer, NavBox, SearchInput, SearchButton, StyledSearchIcon, Logo } from '../me'
-import { NavInnerSection, Row, Typography, Column, Image } from '../widget/styles'
+import useTheme from '../../Theme/useTheme'
+import { NavContainer, NavBox, SearchInput, SearchButton, StyledSearchIcon } from '../me'
+import { NavInnerSection, Typography, Column, Image } from '../widget/styles'
 import { List, ListItem } from './NavBar.styles'
-
 const StyleObj:CSSProperties = {
     fontSize: 22,
     color: '#FFF',
@@ -24,7 +23,10 @@ export const Navbar = () => {
     return (
         <NavContainer>
         <NavInnerSection>
-            <NavBox><Image src={LogoIcon} alt="Logo" height={logo.height} width={logo.width} fit="cover"/></NavBox>
+            <NavBox>
+                <Image src={LogoIcon} alt="Logo" height={logo.height} width={logo.width} fit="cover"/>
+                </NavBox>
+
             <NavBox style={{ background: '#FFF', borderRadius: 6 }}>
                 <SearchInput value={value} type="text" placeholder="Search" onChange={e => {
                     setValue(e.target.value)

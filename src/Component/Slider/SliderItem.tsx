@@ -1,7 +1,7 @@
 import React from 'react'
 import { Section, Row, Column, Typography } from '../widget/styles'
 import { ShopeButton } from './Slider.style'
-import useTheme from '../../theme/useTheme'
+import useTheme from '../../Theme/useTheme'
 interface Props {
 data:string
 }

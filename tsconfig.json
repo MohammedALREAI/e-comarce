@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "baseUrl": "src",
     "target": "es5",
     "lib": [
       "dom",
@@ -32,11 +36,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "rootDir": "."
+    "jsx": "react-jsx"
   },
   "include": [
-    "src",
-    "**/*.ts"
+    "react.app-env.d.ts",
+    "env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

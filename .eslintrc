@@ -39,5 +39,20 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["prettier", "@typescript-eslint","better-styled-components"]
+  "plugins": ["prettier", "@typescript-eslint","better-styled-components"],
+
+
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "src"
+        ],
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
+  },
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { InnerSection, Column, Typography, Image, Row, Button } from '../../../Component/widget/styles'
+import { InnerSection, Column, Row } from 'Component/widget/styles'
 import Rating from '@material-ui/lab/Rating'
 import IconButton from '@material-ui/core/IconButton'
 import BookmarkIcon from '@material-ui/icons/Bookmark'
