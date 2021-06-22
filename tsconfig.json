@@ -1,45 +1,7 @@
 {
-  "compilerOptions": {
-    "types": [
-      "node"
-    ],
-    "baseUrl": "src",
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "plugins": [
-      {
-        "name": "typescript-styled-plugin",
-        "tags": [
-          "styled",
-          "css",
-          "sty"
-        ],
-        "lint": {
-          "vendorPrefix": "error",
-          "zeroUnits": "ignore"
-        }
-      }
-    ],
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
+  "extends": "./tsconfig.paths. json",
   "include": [
-    "react.app-env.d.ts",
+    "src/.env.d.ts",
     "env.d.ts",
     "**/*.ts",
     "**/*.tsx",
@@ -47,5 +9,6 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "compilerOptions": {}
 }
