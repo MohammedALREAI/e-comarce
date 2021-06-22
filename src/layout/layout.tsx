@@ -1,11 +1,15 @@
-import React from 'react'
+
+import { MainContainer } from '../Component/widget/styles'
+import { Navbar } from '../Component/NavBar/Navbar'
+import { FC } from 'react'
 
 
 
-export const Layout = () => {
+export const Layout:FC = ({ children }) => {
     return (
-        <div>
-
-        </div>
+        <MainContainer>
+        <Navbar/>
+        {children}
+        </MainContainer>
     )
 }
