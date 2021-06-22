@@ -97,5 +97,6 @@
     ]
   },
   "proxy": {
-    url:"https://proshop-ms.herokuapp.com/api"}
+    "url":"https://proshop-ms.herokuapp.com/api"
+  }
 }

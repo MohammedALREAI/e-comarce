@@ -1,13 +1,50 @@
+
 {
-  "compilerOptions": {
-    "baseUrl": "src",
+ "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "components/*": ["src/Component"],
-      "pages/*": ["src/pages"],
-      "layout/*": ["src/Layout"],
-      "utils/*": ["src/utils"],
-      "theme/*": ["src/Theme"],
-    }
+      "@/redux/*": ["src/redux"],
+      "@/theme/*": ["Theme"],
+      "@/components/*": ["src/Component/*"],
+      "@/pages/*": ["src/pages/*"],
+
+    },
+    "types": [
+      "node"
+    ],
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin",
+        "tags": [
+          "styled",
+          "css",
+          "sty"
+        ],
+        "lint": {
+          "vendorPrefix": "error",
+          "zeroUnits": "ignore"
+        }
+      }
+    ],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
   }
 }
