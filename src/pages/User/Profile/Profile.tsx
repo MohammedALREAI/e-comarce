@@ -1,4 +1,4 @@
-import { InnerColSection, Row, Column, Divider } from 'Component/widget/styles'
+import { Column, Divider, Row } from '../../../Component/widget/styles'
 import { LeftCard, ImageProfile, RightCard, LabelValueProfile, MyProfile, UploadPhotoButton, ImageProfileWithoutBorder, LabelProfile, UserNameProfile, WrapperImageAndUser, ItemsList } from './profile.styles'
 
 export const Profile = () => {

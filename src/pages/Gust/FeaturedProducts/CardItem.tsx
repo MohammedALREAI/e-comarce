@@ -1,11 +1,9 @@
-import React from 'react'
-import { InnerSection, Column, Row } from 'Component/widget/styles'
 import Rating from '@material-ui/lab/Rating'
-import IconButton from '@material-ui/core/IconButton'
 import BookmarkIcon from '@material-ui/icons/Bookmark'
 import image from '../../../Assets/Images/play.png'
 import { ContainerCard, ImageCard, TitleCard, DiscountCard, PriceCard, RowPrice, AddToCartButton, BockBarkButton } from './styles'
 
+import { Row } from '../../../Component/widget/styles'
 
 interface Props {
     imag:string,
@@ -16,7 +14,7 @@ interface Props {
 }
 
 export const CardItem = ({
- imag,
+    imag,
     title,
     rate,
     discount,

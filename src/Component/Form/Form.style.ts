@@ -5,9 +5,7 @@ import { Field } from 'formik'
 
 export const InputField = styled(Field)<{width:number | string}>`
 
-border:none;
 border: 1px solid #242424;
-border:none;
 border-radius: 6px;
 height: 40px;
 margin-top:10px;
