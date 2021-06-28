@@ -1,16 +1,34 @@
-import { UserReducer } from './User/UserRrducer'
+import { AppActions } from './types.d'
+import { UserReducer } from './User/index'
 import promiseMiddleware from 'redux-promise'
-import ReduxThunk from 'redux-thunk'
+import thunk, { ThunkMiddleware } from 'redux-thunk'
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
+import { GuestReducer } from './Guest'
 // we need to setup the redux to support the async and the  by both applyMiddleware promiseMiddleware+ReduxThunk
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 const rootReducer = combineReducers({
     user: UserReducer,
+    gust: GuestReducer,
 })
 
 
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore)
+const temp = localStorage.getItem('user')
+const userFromLocalStorage = temp ? JSON.parse(temp) : {}
+export type TState = ReturnType<typeof rootReducer>
+
+const middleware = [promiseMiddleware, thunk as ThunkMiddleware<TState, AppActions>]
+
+const initialState = {
+  user: {
+    user: userFromLocalStorage,
+  },
+}
+
+ const Store = createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware(...middleware)),
+  )
 
 
-const devToolsExtension = ((window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()) || compose
-export const useStore = () => createStoreWithMiddleware(rootReducer, devToolsExtension)
+  export default Store

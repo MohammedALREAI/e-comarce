@@ -2,69 +2,86 @@ import React, { useState, CSSProperties } from 'react'
 import PersonIcon from '@material-ui/icons/Person'
 import BookmarkIcon from '@material-ui/icons/Bookmark'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
-import LogoIcon from '../../Assets/Images/logo.png'
-import useTheme from '../../Theme/useTheme'
 import { NavContainer, NavBox, SearchInput, SearchButton, StyledSearchIcon } from '../me'
-import { NavInnerSection, Typography, Column, Image } from '../widget/styles'
-import { List, ListItem } from './NavBar.styles'
-const StyleObj:CSSProperties = {
+import { NavInnerSection } from '../widget/styles'
+import { List, LogoTextYellow, LogoTextWhite } from './NavBar.styles'
+import { ListNavItem } from './ListNavItem'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import { useSelector, useDispatch } from 'react-redux'
+import { TState } from '../../redux/Store'
+import { UserActions } from '../../redux/User/index'
+import { bindActionCreators } from 'redux'
+import IUserState from '../../redux/User/shapeState.interface'
+
+
+const StyleObj: CSSProperties = {
     fontSize: 22,
     color: '#FFF',
     fill: '#FFF',
-    margin: 'auto 0 auto 32px',
-    paddingBottom: '3px',
-    marginBottom: '11px',
+    margin: '0px auto',
+    display: 'flex',
+    alignItems: 'center',
+    alignContent: 'space-between',
+    marginBottom: '10px',
 }
 
 
+
 export const Navbar = () => {
-    const { color: { navBg }, space: { logo, navH } } = useTheme()
     const [value, setValue] = useState<string>('')
+
+    const user = useSelector(({ user }:TState) => user) as IUserState
+    const dispatch = useDispatch()
+    const { logoutSuccess } = bindActionCreators(UserActions, dispatch)
+const { user: { _id } } = user
+
     return (
         <NavContainer>
-        <NavInnerSection>
-            <NavBox>
-                <Image src={LogoIcon} alt="Logo" height={logo.height} width={logo.width} fit="cover"/>
+            <NavInnerSection>
+                <NavBox>
+<LogoTextYellow>Pro</LogoTextYellow>
+<LogoTextWhite>Shop</LogoTextWhite>
                 </NavBox>
 
-            <NavBox style={{ background: '#FFF', borderRadius: 6 }}>
-                <SearchInput value={value} type="text" placeholder="Search" onChange={e => {
-                    setValue(e.target.value)
-                }}/>
-                <SearchButton>
-                    <StyledSearchIcon/>
-                    Search
-                </SearchButton>
-            </NavBox>
-            <NavBox>
-                <List>
-                    <ListItem>
-                        <Column item="center">
-                <PersonIcon style={StyleObj} />
-                <Typography mt={11} color="#FFFFFF" fontSize={13}>Login / Sign up</Typography>
+                <NavBox style={{ background: '#FFF', borderRadius: 6 }}>
+                    <SearchInput value={value} type="text"
+                        placeholder="Search" onChange={e => {
+                            setValue(e.target.value)
+                        }} />
+                    <SearchButton>
+                        <StyledSearchIcon/>
+                        Search
+                    </SearchButton>
+                </NavBox>
+                <NavBox>
+                    <List>
 
-                        </Column>
+                            <ListNavItem to={_id ? '/profile' : '/login'} title={_id ? 'Profile' : 'Login / Sign up'}>
+                                <PersonIcon style={StyleObj} />
+                            </ListNavItem>
 
-                    </ListItem>
-                    <ListItem>
-                    <Column item="center">
+                            <ListNavItem to="/wishlist" title="Wishlist">
+                            <BookmarkIcon style={StyleObj} />
+                            </ListNavItem>
 
-                <BookmarkIcon style={StyleObj}/>
-                <Typography color="#FFFFFF" fontSize={13}>Wishlist</Typography>
-                </Column>
+                        {_id && (
+                            <>
+                             <ListNavItem to="/cart" isBadge={true} countBadge={2} title="Cart">
+                            <ShoppingCartIcon style={StyleObj} />
+                            </ListNavItem>
+                             <ListNavItem to="/logout" title="logout" onClick={() => logoutSuccess()}>
+                             <ExitToAppIcon style={StyleObj} />
+                            </ListNavItem>
 
-                    </ListItem>
-                    <ListItem>
-                    <Column item="center" JC="center">
 
-                <ShoppingCartIcon style={StyleObj}/>
-                <Typography color="#FFFFFF" fontSize={13}>Cart</Typography>
-                </Column>
-                    </ListItem>
-                </List>
-            </NavBox>
-        </NavInnerSection>
-    </NavContainer>
+                            </>
+
+                            )}
+
+                    </List>
+                </NavBox>
+            </NavInnerSection>
+        </NavContainer>
 
 
     )

@@ -88,7 +88,7 @@ text-align: left;
 font-size:24px;
 letter-spacing: 0px;
 color: #000000;
-flex:1;
+flex:3;
 opacity: 1;
 margin-left:75px;
 `
@@ -114,8 +114,17 @@ opacity: 1;
 export const WrapperImageAndUser = Styled('div')`
 
 align-content: center;
-    align-items: center;
-    display: flex;
-    justify-content: space-around;
-    width:100%
+align-items: center;
+display: flex;
+justify-content: space-around;
+width:100%
+`
+
+
+export const ChangePassWord = Styled('div')`
+
+display: flex;
+align-content: flex-start;
+    align-items: flex-start;
+margin-top:50px
 `

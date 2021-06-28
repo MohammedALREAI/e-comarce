@@ -1,19 +1,25 @@
 
 import * as Yup from 'yup'
 
+// .max(50, 'Too Long!').matches(
+//   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+//   'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character')
+
 export const schemaValidationLogin = Yup.object({
     email: Yup.string().email('it should be correct email ')
      .min(5, 'Too Short!')
      .max(50, 'Too Long!')
      .required('Required email'),
    password: Yup.string()
-     .min(4, 'Too Short!')
-     .max(50, 'Too Long!').matches(
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character')
-     .required('Required'),
+     .min(4, 'Too Short!').required('Required'),
 })
-export const schemaValidationSignUp = Yup.object({
+export type schemaValidationLoginType = Yup.InferType<typeof schemaValidationLogin>
+
+
+
+
+export const schemaValidationSignUp =
+ Yup.object({
 
     email: Yup.string().email('it should be correct email ')
     .min(5, 'Too Short!')
@@ -24,10 +30,7 @@ export const schemaValidationSignUp = Yup.object({
     .min(3, 'Name must be at least 3 characters'),
     password: Yup.string()
     .min(4, 'Too Short!')
-    .max(50, 'Too Long!').matches(
-       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character')
-    .required('Required'),
+    .max(50, 'Too Long!').required('Required'),
 
     confirmPassword: Yup
     .string()
@@ -37,3 +40,25 @@ export const schemaValidationSignUp = Yup.object({
       then: Yup.string().oneOf([Yup.ref('password')], "Password doesn't match"),
     }),
 })
+
+
+
+export type schemaValidationSignUpType = Yup.InferType<typeof schemaValidationSignUp>
+
+
+
+export const updateProfileSchema = Yup.object({
+    name: Yup.string().required('Please enter a name'),
+    email: Yup
+      .string()
+      .email('Please enter a valid email')
+      .required('Please enter an email'),
+    password: Yup.string().min(6),
+    passwordConfirmation: Yup
+      .string()
+      .min(6)
+      .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+  })
+
+
+  export type updateProfileSchemaType = Yup.InferType<typeof updateProfileSchema>

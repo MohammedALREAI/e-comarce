@@ -1,7 +1,6 @@
-import { Column, Row } from '../../../../Component/widget/styles'
-import { Label, InputField } from '../../../../Component/Form/Form.style'
+import { Column } from '../../../../Component/widget/styles'
 import logo from '../../../../Assets/Images/login.png'
-import { ReviewText, FooterTitleRight, TextFooter, InnerSection, UserName, Address, WrapperRowInput, RevieworderButton, ChangeText, HeaderTitleRight, WrapperCard, ShapeAddress, Divider, WrapperReviewRow, LeftSection, RightSection, BoxNumber, TextActive } from './review.style'
+import { ReviewText, FooterTitleRight, TextFooter, InnerSection, UserName, Address, RevieworderButton, ChangeText, HeaderTitleRight, WrapperCard, ShapeAddress, Divider, WrapperReviewRow, LeftSection, RightSection, BoxNumber, TextActive } from './review.style'
 import { OrderDetails } from './orderDtails'
 
 export const ReviewTow = () => {

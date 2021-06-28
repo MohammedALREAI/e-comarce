@@ -10,9 +10,9 @@ interface IColumnJS extends IDisplay{
 
 }
 export const Column = styled(FlexBox)<IColumnJS>`
-align-items: ${props => props.item ? props.item : 'start'};
+align-items: ${props => props.item ? props.item : 'flex-start'};
 flex-direction: column;
-justify-content: ${(props) => props.JC ? props.JC : 'start'};
+justify-content: ${(props) => props.JC ? props.JC : 'flex-start'};
 
 
 

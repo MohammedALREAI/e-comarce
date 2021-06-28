@@ -1,14 +1,14 @@
 import React from 'react'
-import { InnerSection, Column, Typography, Row, Divider } from '../../../Component/widget/styles'
+import { InnerSection, Column, Typography, Divider } from '../../../Component/widget/styles'
 import { CardItem } from '../FeaturedProducts/CardItem'
-import imges from '../../../Assets/Images/play.png'
 import { RowWithRadius } from './style'
+import { ISliderImages } from '../../../redux/Guest/GuestState.interface'
 interface Props {
-    me?:string
+    data:ISliderImages[]
 
 }
 
-export const TopRate = (props: Props) => {
+export const TopRate = ({ data }: Props) => {
     return (
         <Column bg="#FFFFFF" height={948}>
         <InnerSection>
@@ -19,18 +19,16 @@ export const TopRate = (props: Props) => {
             <Divider width="100%" height={1}/>
             </Column>
 
-
-
             <RowWithRadius>
-                {Array(3).fill(0).map((x, i) => (
-
+                {data.map((item, i) => (
                 <CardItem
-                key={i}
-                imag={imges}
-                title="some text for you"
-                rate={5}
-                discount={10}
-                rounded={10}
+                _id={item._id}
+                key={item._id}
+                imag={'https://proshop-ms.herokuapp.com/' + item.image}
+                title={item.name}
+                discount={0}
+                price={item.price}
+                rate={item.rating}
                 />
                 ))}
 

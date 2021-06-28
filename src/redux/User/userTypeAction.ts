@@ -1,7 +1,0 @@
-export enum UserTypeAction {
-
-    USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS',
-    USER_LOGIN_FALL = 'USER_LOGIN_FALL',
-    USER_LOGOUGT = 'USER_LOGOUGT',
-
-}

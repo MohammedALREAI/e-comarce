@@ -37,11 +37,12 @@ export const ShoppingCart = (props: Props) => {
 
                 <CardItem
                 key={i}
+                _id={'' + i}
                 imag={imges}
                 title="some text for you"
                 rate={5}
                 discount={10}
-                rounded={10}
+                price={10}
                 />
                 ))}
 

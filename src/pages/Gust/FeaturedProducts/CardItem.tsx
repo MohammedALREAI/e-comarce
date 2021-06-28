@@ -1,58 +1,64 @@
 import Rating from '@material-ui/lab/Rating'
 import BookmarkIcon from '@material-ui/icons/Bookmark'
-import image from '../../../Assets/Images/play.png'
 import { ContainerCard, ImageCard, TitleCard, DiscountCard, PriceCard, RowPrice, AddToCartButton, BockBarkButton } from './styles'
-
+import { CSSProperties } from 'react'
 import { Row } from '../../../Component/widget/styles'
 
 interface Props {
-    imag:string,
-    title:string
+    imag: string,
+    title: string
+    discount?: number
+    price: number,
+    _id:string,
     rate:number
-    discount?:number
-    rounded?:number
 }
 
+
+const style:CSSProperties = {
+
+
+      width: 'auto', height: '50px', color: '#242424',
+
+}
 export const CardItem = ({
+    _id,
     imag,
     title,
-    rate,
     discount,
-    rounded,
+    price,
+    rate,
 }: Props) => {
     return (
-        <ContainerCard>
+        <ContainerCard to={`/product/${_id}/${name}`}>
 
-        <ImageCard src={image} alt={title}/>
-        <TitleCard>{title}</TitleCard>
+            <ImageCard src={imag} alt={title} />
+            <TitleCard>{title}</TitleCard>
 
 
-        <Row my={16} JC="center" item="center">
-    <Rating name="rante_items" value={rate} size="large" />
-    </Row>
-    <RowPrice>
-    {discount
-? (<>
-    <DiscountCard>{discount}</DiscountCard>
-    <PriceCard decoration="line-through">
-                    {discount}
-                    </PriceCard>
+            <Row my={16} JC="center" item="center">
+                <Rating name="rate" value={rate} size="large" />
+            </Row>
+            <RowPrice>
+                {discount && discount > 0
+                    ? (<>
+                        <DiscountCard>{discount}</DiscountCard>
+                        <PriceCard isDiscount={true}>
+                            {price}
+                        </PriceCard>
 
-    </>)
-     : <PriceCard decoration="line-through">{discount}</PriceCard>
-    }
+                    </>)
+                    : <PriceCard >{price}</PriceCard>
+                }
             </RowPrice>
-                <Row width="100%">
-                            <Row width={54} height={62} JC="center" mb={34}>
-                            <BockBarkButton aria-label="BookmarkIconS">
-                                <BookmarkIcon aria-label="BookmarkIcon" style={{
-width: 'auto', height: '50px', color: '#242424',
-                                }}/>
-                                     </BockBarkButton>
-                                     <AddToCartButton>Add to cart</AddToCartButton>
-      </Row>
+            <Row width="100%">
+                <Row width={54} height={62} JC="center" mb={34}>
+                    <BockBarkButton aria-label="BookmarkIconS">
+                        <BookmarkIcon aria-label="BookmarkIcon" style={style} />
+                    </BockBarkButton>
+                    <AddToCartButton>Add to cart</AddToCartButton>
                 </Row>
+            </Row>
 
-       </ContainerCard>
+        </ContainerCard>
     )
 }

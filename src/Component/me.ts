@@ -56,7 +56,6 @@ export const NavContainer = styled('nav')`
     background: #242424 0% 0% no-repeat padding-box;
     display: flex;
     height: 85px;
-    height: auto;
     justify-content: center;
     opacity: 1;
     width:100%

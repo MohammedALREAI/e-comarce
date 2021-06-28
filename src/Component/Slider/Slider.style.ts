@@ -16,3 +16,24 @@ text-transform: uppercase;
 width: 220px;
 
 `
+export const PriceText = styled('p')`
+color:#242424;
+font-size:32px;
+margin-bottom: 10px;
+`
+
+
+export const DescriptionText = styled(PriceText)`
+color:#242424;
+font-size:32px;
+margin-bottom:42px;
+`
+
+export const NameText = styled(PriceText)`
+
+color:#242424;
+font-size:60px;
+font-weight:bold;
+margin-bottom: 10px;
+
+`

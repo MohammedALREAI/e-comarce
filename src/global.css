@@ -19,3 +19,17 @@ code {
     color: #f50057!important;
     margin: -6px !important;
 }
+
+
+
+.MuiSvgIcon-roo{
+    font-size: 22px !important;
+    color: rgb(255, 255, 255) !important;
+    fill: rgb(255, 255, 255) !important;
+    margin: 0px auto !important;
+    display: flex !important;
+    align-items: center !important;
+    align-content: space-between !important;
+    padding-bottom: 15px !important;
+
+}

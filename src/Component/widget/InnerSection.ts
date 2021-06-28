@@ -9,8 +9,8 @@ export const InnerSection = styled(Column)`
   width:100%;
 `
 export const InnerColSection = styled(InnerSection)`
-  align-items: start;
-  justify-content:start;
+  align-items: flex-start;
+  justify-content:flex-start;
 `
 export const NavInnerSection = styled(Row)`
     align-items: center;

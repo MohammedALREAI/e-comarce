@@ -3,23 +3,26 @@ import { ThemeProvider } from 'styled-components'
 
 import { HelmetProvider } from 'react-helmet-async'
 import { Provider } from 'react-redux'
-import { useStore } from './redux/Store'
+import Store from './redux/Store'
 import useTheme from './Theme/useTheme'
 import { GlobalStyle } from './Theme/GlobalStyle'
+import { BrowserRouter } from 'react-router-dom'
 
 
 const Providers: React.FC = ({ children }) => {
   const theme = useTheme()
-  const store = useStore()
 
   return (
-      <Provider store={store}>
+      <Provider store={Store}>
+          <BrowserRouter>
           <HelmetProvider>
           <ThemeProvider theme={theme}>
             <GlobalStyle />
                  {children}
                  </ThemeProvider>
           </HelmetProvider>
+          </BrowserRouter>
+
       </Provider>
   )
 }

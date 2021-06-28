@@ -34,9 +34,10 @@ opacity: 1;
 `
 
 
-export const ButtonLogin = styled('button')`
+export const ButtonLogin = styled('button')<{iSDisabled?:boolean}>`
 align-items: center;
 background: #FCDD06;
+border: none;
 border:none;
 border-radius: 6px;
 color: #242424;
@@ -45,7 +46,15 @@ font-size: 22px;
 height: 40px;
 justify-content: center;
 margin-top:30px;
-opacity: 1;
+
 outline:none;
 width: 398px;
+${(props) =>
+    props.iSDisabled
+      ? `
+        background:gray;
+        color:white;
+        cursor: none;
+  `
+      : ''}
 `
