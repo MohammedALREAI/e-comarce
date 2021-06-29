@@ -1,24 +1,24 @@
 
 
-export interface User{
-    _id: string,
-      name: string
-      email: string
-      token: string,
+export interface User {
+     _id: string,
+     name: string
+     email: string
+     token: string,
 }
 
 
-export default interface IUserState{
-    isLoading?:boolean,
-    error?:string,
-    success?: boolean,
-    user: User,
-      userProfile: {
+export default interface IUserState {
+     isLoading?: boolean,
+     error?: string,
+     success?: boolean,
+     user: User | Object | string | any,
+     userProfile?: {
           user?: User,
           isLoading?: boolean,
-          success?:boolean,
-          error?:string,
+          success?: boolean,
+          error?: string,
 
 
-        }
-        }
+     }
+}

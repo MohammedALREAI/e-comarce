@@ -21,12 +21,9 @@ export const UpdateProfile = () => {
     const { error, isLoading } = user
 
 
-
-
     useEffect(() => {
         getProfile()
     }, [dispatch])
-
 
     const initialValues: updateProfileSchemaType = {
         email: (user.userProfile?.user?.email) as string | '',

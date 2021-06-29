@@ -1,2 +1,2 @@
 export { GuestReducer } from './GuestRrducer'
-export { ActionGuest } from './GuestAction'
+export { GuestActions } from './GuestAction'

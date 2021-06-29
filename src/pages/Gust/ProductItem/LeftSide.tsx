@@ -1,6 +1,6 @@
 import React from 'react'
 import { WrapperImages, ImageLists } from './productItem.styles'
-import { Column, Row, Image } from '../../../Component/widget/styles'
+import { Column, Image } from '../../../Component/widget/styles'
 
 
 export const LeftSide = () => {
