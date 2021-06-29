@@ -10,7 +10,7 @@ export interface IProduct {
      name: string
      numReviews: number
      price: number
-     rating: 4
+     rating: number
      reviews: Array<any>
      updatedAt: string
 }

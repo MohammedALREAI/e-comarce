@@ -36,11 +36,9 @@ export const ProductItem = ({ title }: Props) => {
         getProductById(id)
     }, [dispatch, id])
 
-    return gust.isLoading || product.isLoading
-? (
+    return gust.isLoading || product.isLoading ? (
         <SpinnerContainer />
-    )
-: (
+    ) : (
         <Column bg="#FFFFFF" height={948}>
             <InnerSectionWrapper>
                 <Navigation title={product.product?.name} />
@@ -48,24 +46,26 @@ export const ProductItem = ({ title }: Props) => {
                     <LeftContainer>
                         <LeftSide image={URL_IMAGES + product.product.image} />
                     </LeftContainer>
-                             <RightContainer name={ product.product.name}
-                                  description={product.product.description}
-                                  price={product.product.price}
-                                  count={1}>
+                    <RightContainer
+                        name={product.product.name}
+                        description={product.product.description}
+                        price={product.product.price}
+                        count={1}
+                    >
                         <RightSide />
                     </RightContainer>
                 </Row>
                 <Column mt={63}>
                     <TextTitle
                         style={{
-                            marginBottom: '31px',
+                            marginBottom: "31px",
                         }}
                     >
-                        {' '}
+                        {" "}
                         Specification
                     </TextTitle>
                     <SpecificationSection>
-                        <TextTitle style={{ fontSize: '24px' }}> Technical Details</TextTitle>
+                        <TextTitle style={{ fontSize: "24px" }}> Technical Details</TextTitle>
                         <Column mt={30}>
                             {Array(5)
                                 .fill(0)
@@ -86,17 +86,18 @@ export const ProductItem = ({ title }: Props) => {
                                     </Row>
                                 ))}
                         </Column>
+                        {}
                     </SpecificationSection>
                     <TextTitle
                         style={{
-                            marginTop: '63px',
-                            marginBottom: '31px',
+                            marginTop: "63px",
+                            marginBottom: "31px",
                         }}
                     >
-                        {' '}
+                        {" "}
                         Reviews
                     </TextTitle>
-                    <SpecificationSection style={{ padding: '30px 50px' }}>
+                    <SpecificationSection style={{ padding: "30px 50px" }}>
                         {Array(6)
                             .fill(0)
                             .map((x, index) => (
@@ -106,5 +107,5 @@ export const ProductItem = ({ title }: Props) => {
                 </Column>
             </InnerSectionWrapper>
         </Column>
-    )
+    );
 }

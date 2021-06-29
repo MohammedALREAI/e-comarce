@@ -1,20 +1,20 @@
-import { ISliderImages, IFeatherProduct } from './GuestState.interface'
+import { IProduct } from './GuestState.interface'
 import { Action } from 'redux'
 
 
 
-export enum EnumGuestAction{
+export enum EnumGuestAction {
 
-    GET_SLIDER_IMAGES_START = 'GET_SLIDER_IMAGES_START',
-    GET_SLIDER_IMAGES_SUCCESS = 'GET_SLIDER_IMAGES_SUCCESS',
-    GET_SLIDER_IMAGES_FILL = 'GET_SLIDER_IMAGES_FILL',
-    GET_FEATURED_PRODUCTS_START = 'GET_FEATURED_PRODUCTS_START',
-    GET_FEATURED_PRODUCTS_SUCCESS = 'GET_FEATURED_PRODUCTS_SUCCESS',
-    GET_FEATURED_PRODUCTS_FILL = 'GET_FEATURED_PRODUCTS_FILL',
+     GET_SLIDER_IMAGES_START = 'GET_SLIDER_IMAGES_START',
+     GET_SLIDER_IMAGES_SUCCESS = 'GET_SLIDER_IMAGES_SUCCESS',
+     GET_SLIDER_IMAGES_FILL = 'GET_SLIDER_IMAGES_FILL',
+     GET_FEATURED_PRODUCTS_START = 'GET_FEATURED_PRODUCTS_START',
+     GET_FEATURED_PRODUCTS_SUCCESS = 'GET_FEATURED_PRODUCTS_SUCCESS',
+     GET_FEATURED_PRODUCTS_FILL = 'GET_FEATURED_PRODUCTS_FILL',
 
-    GET_PRODUCT_BY_ID_FILL = 'GET_PRODUCT_BY_ID_FILL',
-    GET_PRODUCT_BY_ID_START = 'GET_PRODUCT_BY_ID_START',
-    GET_PRODUCT_BY_ID_SUCCESS = 'GET_PRODUCT_BY_ID_SUCCESS',
+     GET_PRODUCT_BY_ID_FILL = 'GET_PRODUCT_BY_ID_FILL',
+     GET_PRODUCT_BY_ID_START = 'GET_PRODUCT_BY_ID_START',
+     GET_PRODUCT_BY_ID_SUCCESS = 'GET_PRODUCT_BY_ID_SUCCESS',
 
 
 
@@ -36,22 +36,22 @@ export enum EnumGuestAction{
 
 
 
- /**
-  *  the all status of all the  th FetchImageSlider
-  */
+/**
+ *  the all status of all the  th FetchImageSlider
+ */
 
 export interface FetchImageSliderSuccess extends Action<string> {
-    type: EnumGuestAction.GET_SLIDER_IMAGES_SUCCESS;
-    payload:ISliderImages[]
+     type: EnumGuestAction.GET_SLIDER_IMAGES_SUCCESS;
+     payload: IProduct[]
 
 }
 export interface FetchImageSliderStart extends Action<string> {
-    type: EnumGuestAction.GET_SLIDER_IMAGES_START;
+     type: EnumGuestAction.GET_SLIDER_IMAGES_START;
 
 }
 export interface FetchImageSliderFill extends Action<string> {
-    type: EnumGuestAction.GET_SLIDER_IMAGES_FILL;
-    payload:string
+     type: EnumGuestAction.GET_SLIDER_IMAGES_FILL;
+     payload: string
 
 }
 
@@ -67,41 +67,41 @@ export interface FetchImageSliderFill extends Action<string> {
 
 
 export interface FetchIProductByIDSuccess extends Action<string> {
-    type: EnumGuestAction.GET_PRODUCT_BY_ID_SUCCESS;
-    payload:ISliderImages[]
+     type: EnumGuestAction.GET_PRODUCT_BY_ID_SUCCESS;
+     payload: IProduct[]
 
 }
 export interface FetchIProductByIDStart extends Action<string> {
-    type: EnumGuestAction.GET_PRODUCT_BY_ID_START;
+     type: EnumGuestAction.GET_PRODUCT_BY_ID_START;
 
 }
 export interface FetchIProductByIDFill extends Action<string> {
-    type: EnumGuestAction.GET_PRODUCT_BY_ID_FILL;
-    payload:string
+     type: EnumGuestAction.GET_PRODUCT_BY_ID_FILL;
+     payload: string
 
 }
 
 
 
- /**
-  *  the all status of all the  th GET_FEATURED_PRODUCTS
-  */
+/**
+ *  the all status of all the  th GET_FEATURED_PRODUCTS
+ */
 
 
 
 
-  export interface FetchFeathersSuccess extends Action<string> {
-    type: EnumGuestAction.GET_FEATURED_PRODUCTS_SUCCESS;
-    payload:Array<IFeatherProduct> | []
+export interface FetchFeathersSuccess extends Action<string> {
+     type: EnumGuestAction.GET_FEATURED_PRODUCTS_SUCCESS;
+     payload: Array<IProduct> | []
 
 }
 export interface FetchFeathersStart extends Action<string> {
-    type: EnumGuestAction.GET_FEATURED_PRODUCTS_START;
+     type: EnumGuestAction.GET_FEATURED_PRODUCTS_START;
 
 }
 export interface FetchFeathersFill extends Action<string> {
-    type: EnumGuestAction.GET_FEATURED_PRODUCTS_FILL;
-    payload:string
+     type: EnumGuestAction.GET_FEATURED_PRODUCTS_FILL;
+     payload: string
 
 }
 
@@ -115,11 +115,11 @@ export interface FetchFeathersFill extends Action<string> {
 
 
 
- export type FetchFeather = FetchFeathersFill | FetchFeathersStart | FetchFeathersSuccess;
- export type GetProductById = FetchIProductByIDSuccess | FetchIProductByIDStart | FetchIProductByIDFill;
+export type FetchFeather = FetchFeathersFill | FetchFeathersStart | FetchFeathersSuccess;
+export type GetProductById = FetchIProductByIDSuccess | FetchIProductByIDStart | FetchIProductByIDFill;
 
 
- export type FetchImageSlider = FetchImageSliderSuccess | FetchImageSliderStart | FetchImageSliderFill;
+export type FetchImageSlider = FetchImageSliderSuccess | FetchImageSliderStart | FetchImageSliderFill;
 
 
 

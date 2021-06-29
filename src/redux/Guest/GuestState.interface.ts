@@ -1,41 +1,64 @@
 
 
-export interface ISliderImages{
-    _id: string,
-      name: string
-      description: string
-      image: string,
-      price:number
-      rating:number
+export interface ISliderImages {
+     _id: string,
+     name: string
+     description: string
+     image: string,
+     price: number
+     rating: number
 }
 
 
-export interface IFeatherProduct{
-  _id:string
-  image:string,
-  name:string,
-  discount:string,
-  price:number,
-  rating:number,
-  brand:string
-  category:string,
-  createdAt: string,
-  updatedAt: string,
-  description:string
+export interface IProduct {
 
-  }
+     _id: string
+     brand: string,
+     category: string
+     countInStock: number
+     createdAt: string
+     description: string
+     image: string
+     name: string
+     numReviews: number
+     price: number
+     rating: number
+     reviews: Array<Review>
+     updatedAt: string,
+     brand: string
+     category: string
+     countInStock: number
+     user: string
+}
 
 
-  export interface IGuestState {
 
-    sliderImages:ISliderImages[],
-    products: IFeatherProduct[],
-    isLoading?: boolean,
-    error:string,
-    product: {
-      product?:Object,
-      isLoading?: boolean,
-      error?:string,
+interface Review {
 
-    }
-  }
+     _id: string,
+     name: string
+     rating: number,
+     comment: string,
+     user: string
+     createdAt: string,
+     updatedAt: string
+
+
+}
+
+
+
+
+export interface IGuestState {
+
+     sliderImages: IProduct[],
+     products: IProduct[],
+     isLoading?: boolean,
+     error: string,
+     product: {
+          product?: Object,
+          isLoading?: boolean,
+          error?: string,
+
+     }
+}
