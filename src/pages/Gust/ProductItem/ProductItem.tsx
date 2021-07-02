@@ -10,25 +10,24 @@ import {
 import { LeftSide } from './LeftSide'
 import { RightSide } from './RightSide'
 import { ReviewItem } from './ReviewItem'
+import { Column, Row, SpinnerContainer } from 'Component/widget/styles'
 
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useParams } from 'react-router'
+import { useParams } from 'react-router'
 import { TState } from 'redux/Store'
 import { GuestActions } from 'redux/Guest/index'
+import { Navigation } from 'Component/Navigation/Navigater'
 import { bindActionCreators } from 'redux'
 import { URL_IMAGES } from 'Const/env'
-interface Props {
-    title?: string;
-}
 
-export const ProductItem = ({ title }: Props) => {
+
+export const ProductItem = () => {
     const [count, setCount] = useState(1)
     const dispatch = useDispatch()
     const gust = useSelector((state: TState) => state.gust)
     const { fetchProduct, getProductById } = bindActionCreators(GuestActions, dispatch)
-    const { id } = useParams<{ id: string}>()
-    const history = useHistory()
+    const { id } = useParams<{ id: string }>()
     const product = gust.product
 
     useEffect(() => {
@@ -36,12 +35,14 @@ export const ProductItem = ({ title }: Props) => {
         getProductById(id)
     }, [dispatch, id])
 
-    return gust.isLoading || product.isLoading ? (
+    return gust.isLoading || product.isLoading
+? (
         <SpinnerContainer />
-    ) : (
+    )
+: (
         <Column bg="#FFFFFF" height={948}>
             <InnerSectionWrapper>
-                <Navigation title={product.product?.name} />
+                <Navigation title={product.product.name} />
                 <Row mt={62}>
                     <LeftContainer>
                         <LeftSide image={URL_IMAGES + product.product.image} />
@@ -58,14 +59,14 @@ export const ProductItem = ({ title }: Props) => {
                 <Column mt={63}>
                     <TextTitle
                         style={{
-                            marginBottom: "31px",
+                            marginBottom: '31px',
                         }}
                     >
-                        {" "}
+                        {' '}
                         Specification
                     </TextTitle>
                     <SpecificationSection>
-                        <TextTitle style={{ fontSize: "24px" }}> Technical Details</TextTitle>
+                        <TextTitle style={{ fontSize: '24px' }}> Technical Details</TextTitle>
                         <Column mt={30}>
                             {Array(5)
                                 .fill(0)
@@ -90,14 +91,14 @@ export const ProductItem = ({ title }: Props) => {
                     </SpecificationSection>
                     <TextTitle
                         style={{
-                            marginTop: "63px",
-                            marginBottom: "31px",
+                            marginTop: '63px',
+                            marginBottom: '31px',
                         }}
                     >
-                        {" "}
+                        {' '}
                         Reviews
                     </TextTitle>
-                    <SpecificationSection style={{ padding: "30px 50px" }}>
+                    <SpecificationSection style={{ padding: '30px 50px' }}>
                         {Array(6)
                             .fill(0)
                             .map((x, index) => (
@@ -107,5 +108,5 @@ export const ProductItem = ({ title }: Props) => {
                 </Column>
             </InnerSectionWrapper>
         </Column>
-    );
+    )
 }

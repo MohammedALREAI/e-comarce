@@ -1,6 +1,6 @@
 import { RightItem } from './RightItem'
 import { LeftItem } from './LeftItem'
-import { Column, InnerSection, Navigation } from 'Component/widget/styles'
+import { Column, InnerSection } from 'Component/widget/styles'
 import { Navigation } from 'Component/Navigation/Navigater'
 
 

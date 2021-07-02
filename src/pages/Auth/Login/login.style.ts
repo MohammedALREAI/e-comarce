@@ -1,4 +1,3 @@
-import { Button } from './../../../Component/widget/Button'
 import Styled from 'styled-components'
 
 export const LoginText = Styled('p')`

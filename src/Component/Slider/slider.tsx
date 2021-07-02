@@ -2,12 +2,12 @@ import React, { useState, CSSProperties } from 'react'
 import SwipeableViews from 'react-swipeable-views'
 import { SliderItem } from './SliderItem'
 import { URL_IMAGES } from 'Const/env'
-import { ISliderImages } from 'redux/Guest/GuestState.interface'
+import { IProduct } from 'redux/Guest/GuestState.interface'
 import { Column, InnerSection, Row } from 'Component/widget/styles'
 import { Arrow, Dot } from 'pages/Gust/HomeScreen/Home.styles'
 
 interface Props {
-    data: ISliderImages[];
+    data: IProduct[];
 }
 
 const cssStyle: CSSProperties = {
@@ -59,7 +59,7 @@ export const Slider = ({ data }: Props) => {
                     <SwipeableViews index={sliderIndex} style={cssStyle}>
                         {sliders}
                     </SwipeableViews>
-                    <Row width='400px JC="center" item="center" mb={32}>
+                    <Row width="400px" JC="center" item="center" mb={32}>
                         <Arrow isLeft={true} onClick={handleRight}>
                             &#8250;
                         </Arrow>

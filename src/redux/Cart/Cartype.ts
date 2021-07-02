@@ -1,4 +1,6 @@
-import { IADD_ITEM, IItemCart } from './CartState.interface'
+/*eslint no-case-declarations: "error"*/
+
+import { IItemCart } from './CartState.interface'
 import { Action } from 'redux'
 
 
@@ -9,24 +11,9 @@ export enum EnumCartAction {
      RESET = 'RESET',
      INCREASE_COUNT = 'INCREASE_COUNT',
      DECREASE_COUNT = 'DECREASE_COUNT ',
-
-
-
+     ADD_SHIPPING_ADDRESS = 'ADD_SHIPPING_ADDRESS'
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**
@@ -35,27 +22,49 @@ export enum EnumCartAction {
 
 export interface AddItem extends Action<string> {
      type: EnumCartAction.ADD_ITEM;
-     payload: IItemCart[]
+     payload: {
+          itemCartProduct: IItemCart
+
+     }
 
 }
+
+/**
+ * addingShoppingAddress
+ */
+export interface addingShoppingAddress extends Action<string> {
+     type: EnumCartAction.ADD_SHIPPING_ADDRESS;
+     payload: {
+          inputValues: {}
+
+     }
+
+}
+
+/**
+ *DeleteItem
+ */
 export interface DeleteItem extends Action<string> {
      type: EnumCartAction.DELETE_ITEM;
-     payload: string
+     payload: {
+          _id: string
+     }
 
 }
 export interface Rest extends Action<string> {
      type: EnumCartAction.RESET;
 
 }
-export interface Increse extends Action<string> {
+export interface Increase extends Action<string> {
      type: EnumCartAction.INCREASE_COUNT;
-     payload: IItemCart
-
-
+     payload: IItemCart[]
 }
 export interface Decrease extends Action<string> {
      type: EnumCartAction.DECREASE_COUNT;
-     payload: IItemCart
+     payload: {
+          itemCarts: IItemCart[] | [] | IItemCart
+
+     }
 
 
 }
@@ -74,4 +83,4 @@ export interface Decrease extends Action<string> {
 
 
 
-export type ActionCartType = Decrease | Increse | Rest | DeleteItem | AddItem
+export type ActionCartType = Decrease | Increase | Rest | DeleteItem | AddItem

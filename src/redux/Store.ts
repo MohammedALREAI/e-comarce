@@ -1,3 +1,4 @@
+import { OrderReducer } from './Order/OrderReducer'
 import { CartReducer } from './Cart/CartRrducer'
 import { AppActions } from './types.d'
 import { UserReducer } from './User/index'
@@ -11,12 +12,15 @@ const rootReducer = combineReducers({
      user: UserReducer,
      gust: GuestReducer,
      cart: CartReducer,
+     order: OrderReducer,
 })
 
 
 const tempCart = localStorage.getItem('cart')
 const tempUser = localStorage.getItem('user')
+const tempShipping = localStorage.getItem('shipping')
 const userFromLocalStorage = tempUser ? JSON.parse(tempUser) : {}
+const shippingFromLocalStorage = tempShipping ? JSON.parse(tempShipping) : {}
 
 const cartFromLocalStorage = tempCart ? JSON.parse(tempCart) : []
 
@@ -30,6 +34,7 @@ const preloadedState = {
      },
      cart: {
           cart: cartFromLocalStorage,
+          shippingAddress: shippingFromLocalStorage,
      },
 }
 

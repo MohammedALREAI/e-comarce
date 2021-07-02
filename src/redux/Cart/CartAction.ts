@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
 import { TState } from '../Store'
-import { IItemCart, IProduct } from './CartState.interface'
+import { IItemCart } from './CartState.interface'
 import { ActionCartType, EnumCartAction } from './Cartype'
 
 
@@ -23,11 +23,6 @@ const addItem = (product: IProduct, quantity: number) => {
 
           const isFound = cart.find(item => item._id === product._id)
 
-          /**
-                     * CHECK IF THE ITEM FOUND OR NOT IF FOUND WILL BE iNCRISE ELS WILL BA ADD first time
-                     */
-
-
           if (isFound) {
                const newProductWithQuantity: IItemCart = {
                     ...product,
@@ -39,8 +34,8 @@ const addItem = (product: IProduct, quantity: number) => {
                cart[indexProduct] = newProductWithQuantity
 
                dispatch({
-                    type: EnumCartAction.ADD_ITEM,
-                    payload: cart,
+                    type: EnumCartAction.INCREASE_COUNT,
+                    payload: getState().cart.cart,
                })
           } else {
                const newProductWithquantity: IItemCart = {
@@ -48,8 +43,10 @@ const addItem = (product: IProduct, quantity: number) => {
                     quantity,
                }
                dispatch({
-                    type: EnumCartAction.INCREASE_COUNT,
-                    payload: newProductWithquantity,
+                    type: EnumCartAction.ADD_ITEM,
+                    payload: {
+                         itemCartProduct: newProductWithquantity,
+                    },
                })
           }
 
@@ -60,8 +57,66 @@ const addItem = (product: IProduct, quantity: number) => {
 
 
 
+/**
+ * decreesItem =>it should item contains quantity
+ * @param product
+ * @param quantity
+ * @returns
+ */
+
+
+const decreesItem = (product: IItemCart, quantity = 1) => {
+     return async (dispatch: Dispatch<ActionCartType>, getState: () => TState) => {
+          const cart = getState().cart.cart
+
+
+          const isFound = cart.find(item => item._id === product._id)
+
+          if (isFound) {
+               isFound.quantity -= quantity
+               const index = cart.findIndex((item) => item._id === isFound._id)
+
+
+               cart[index] = isFound
+               dispatch({
+                    type: EnumCartAction.DECREASE_COUNT,
+                    payload: {
+                         itemCarts: cart,
+                    },
+               })
+          }
+
+          localStorage.setItem('cart', JSON.stringify(getState().cart.cart))
+     }
+}
+
+
+
+
+export const deleteItem = (id: string) => (dispatch: Dispatch<ActionCartType>, getState: () => TState) => {
+     dispatch({
+          type: DELETE_CART_ITEM,
+          payload: id,
+     })
+     localStorage.setItem('cart', JSON.stringify(getState().cart.cart))
+}
+
+
+export const addShippingAddress = (values) => {
+     localStorage.setItem('shipping', JSON.stringify(values))
+
+     return {
+          type: EnumCartAction.ADD_SHIPPING_ADDRESS,
+          payload: {
+               inputValues: values,
+          },
+     }
+}
 
 
 export const CartActions = {
      addItem,
+     decreesItem,
+     deleteItem,
+     addShippingAddress,
 }

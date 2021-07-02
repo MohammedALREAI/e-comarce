@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
   font-family:'Montserrat';
 }
 
-body { 
+body {
   margin: 0;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

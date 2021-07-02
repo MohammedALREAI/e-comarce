@@ -1,14 +1,5 @@
 
 
-export interface ISliderImages {
-     _id: string,
-     name: string
-     description: string
-     image: string,
-     price: number
-     rating: number
-}
-
 
 export interface IProduct {
 
@@ -56,7 +47,7 @@ export interface IGuestState {
      isLoading?: boolean,
      error: string,
      product: {
-          product?: Object,
+          product: IProduct,
           isLoading?: boolean,
           error?: string,
 

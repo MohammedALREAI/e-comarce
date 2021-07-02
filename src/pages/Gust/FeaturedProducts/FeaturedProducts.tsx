@@ -3,12 +3,11 @@ import { CardItem } from './CardItem'
 import SwipeableViews from 'react-swipeable-views'
 import { Column, InnerSection, Row } from 'Component/widget/styles'
 import { URL_IMAGES } from 'Const/env'
-import { IFeatherProduct } from 'redux/Guest/GuestState.interface'
 import { Dot } from '../HomeScreen/Home.styles'
 import { LabelName } from './LableTitle'
-import { IProduct } from 'redux/Cart/CartState.interface'
+import { IProduct } from 'redux/Guest/GuestState.interface'
 interface Props {
-    data: Array<IProduct>;
+    data: IProduct[][];
 }
 const cssStyle: CSSProperties = {
     position: 'relative',
@@ -19,20 +18,20 @@ const cssStyle: CSSProperties = {
 export const FeaturedProducts = ({ data }: Props) => {
      const [sliderIndex, setSliderIndex] = useState<number>(0)
      const insiderData = data.map((x, index) => (
-        <Row JC="space-between" mt={43} radius={16} key={index}>
-            {x.map((item: IFeatherProduct, itemIndex: number) => (
-                <CardItem
-                    _id={item._id}
-                    imag={URL_IMAGES + item.image}
-                    key={itemIndex}
-                    title={item.name}
-                    rate={item.rating}
-                    discount={0}
-                    price={item.price}
-                />
-            ))}
-        </Row>
-    ))
+         <Row JC="space-between" mt={43} radius={16} key={index}>
+             {x.map((item, itemIndex) => (
+                 <CardItem
+                     _id={item._id}
+                     image={URL_IMAGES + item.image}
+                     key={itemIndex}
+                     name={item.name}
+                     rating={item.rating}
+                     price={item.price}
+                     description={item.description}
+                 />
+             ))}
+         </Row>
+     ))
 
     return (
         <Column bg="#F7F8FC" height={948}>

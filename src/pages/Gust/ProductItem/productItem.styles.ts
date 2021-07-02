@@ -23,7 +23,7 @@ margin-left:15px;
 `
 
 
-export const HalfRow = Styled(Row)<{isHover?:boolean}>`
+export const HalfRow = Styled(Row) <{ isHover?: boolean }>`
 flex:1;
 height: 62px;
 font-size:16px;
@@ -32,12 +32,12 @@ color: #242424;
 padding:21px 35px;
 margin-right:43px;
 ${props => props.isHover
-? `
+          ? `
 border-radius: 10px;
 background: #F2F2F2;
 
 `
-: `
+          : `
 
 border-radius: 10px;
 background: #FFFFFF;
@@ -114,7 +114,10 @@ opacity: 1;
 
 
 
-export const Specification = Styled('p')
+export const Specification = Styled('p')`
+opacity: 1;
+
+`
 
 export const WrapperImages = Styled(Row)`
 margin-top: 70px;
@@ -196,7 +199,7 @@ width: 220px;
 height: 50px;
 `
 
-export const RoundColor = Styled('div')<{bg?:string, isActive?:boolean}>`
+export const RoundColor = Styled('div') <{ bg?: string, isActive?: boolean }>`
 
 width: 40px;
   height: 40px;
@@ -293,7 +296,7 @@ margin-left:10px
 margin-bottom:30px;
 
 `
-export const SelectedButton = Styled('button')<{isActive?:boolean}>`
+export const SelectedButton = Styled('button') <{ isActive?: boolean }>`
 width: 135px;
 height: 40px;
 border-radius: 10px;
@@ -305,10 +308,10 @@ outline:none ;
 border:none;
 margin-left:20px;
 ${props => props.isActive
-? `box-shadow: 0px 2px 20px #08091E1A;
+          ? `box-shadow: 0px 2px 20px #08091E1A;
 color: #FFFFFF;
 background:#242424`
- : `color:#242424;
+          : `color:#242424;
  background:#F5F5F5
 
  `}

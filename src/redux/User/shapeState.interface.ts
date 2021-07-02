@@ -12,7 +12,7 @@ export default interface IUserState {
      isLoading?: boolean,
      error?: string,
      success?: boolean,
-     user: User | Object | string | any,
+     user: User | any,
      userProfile?: {
           user?: User,
           isLoading?: boolean,

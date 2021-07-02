@@ -1,35 +1,13 @@
-export interface IProduct {
-
-     _id: string
-     brand: string,
-     category: string
-     countInStock: number
-     createdAt: string
-     description: string
-     image: string
-     name: string
-     numReviews: number
-     price: number
-     rating: number
-     reviews: Array<any>
-     updatedAt: string
-}
-
-
-
-
+import { IProduct } from 'redux/Guest/GuestState.interface'
 export interface IItemCart extends IProduct {
 
      quantity: number
-
 }
 
 
-
-
-
 export interface ICartState {
-     cart: Array<IItemCart>,
+     cart: IItemCart[] | Object,
+     shippingAddress: Object
 }
 
 
