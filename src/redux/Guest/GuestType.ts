@@ -17,10 +17,16 @@ export enum EnumGuestAction {
      GET_PRODUCT_BY_ID_SUCCESS = 'GET_PRODUCT_BY_ID_SUCCESS',
 
 
+     /***
+      * sarcah  resu;t
+      */
+
 
 
 
 }
+
+
 
 
 
@@ -42,8 +48,8 @@ export enum EnumGuestAction {
 
 export interface FetchImageSliderSuccess extends Action<string> {
      type: EnumGuestAction.GET_SLIDER_IMAGES_SUCCESS;
-     payload: IProduct[]
-
+     payload: { sliders: IProduct[]
+     }
 }
 export interface FetchImageSliderStart extends Action<string> {
      type: EnumGuestAction.GET_SLIDER_IMAGES_START;
@@ -51,7 +57,7 @@ export interface FetchImageSliderStart extends Action<string> {
 }
 export interface FetchImageSliderFill extends Action<string> {
      type: EnumGuestAction.GET_SLIDER_IMAGES_FILL;
-     payload: string
+     payload: { error: string }
 
 }
 
@@ -68,7 +74,9 @@ export interface FetchImageSliderFill extends Action<string> {
 
 export interface FetchIProductByIDSuccess extends Action<string> {
      type: EnumGuestAction.GET_PRODUCT_BY_ID_SUCCESS;
-     payload: IProduct[]
+     payload:{
+          product:IProduct
+     }
 
 }
 export interface FetchIProductByIDStart extends Action<string> {
@@ -77,7 +85,9 @@ export interface FetchIProductByIDStart extends Action<string> {
 }
 export interface FetchIProductByIDFill extends Action<string> {
      type: EnumGuestAction.GET_PRODUCT_BY_ID_FILL;
-     payload: string
+     payload: {
+          error:string
+     }
 
 }
 
@@ -92,8 +102,9 @@ export interface FetchIProductByIDFill extends Action<string> {
 
 export interface FetchFeathersSuccess extends Action<string> {
      type: EnumGuestAction.GET_FEATURED_PRODUCTS_SUCCESS;
-     payload: Array<IProduct> | []
-
+     payload: {
+          product: Array<IProduct>
+     }
 }
 export interface FetchFeathersStart extends Action<string> {
      type: EnumGuestAction.GET_FEATURED_PRODUCTS_START;

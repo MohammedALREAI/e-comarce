@@ -1,4 +1,4 @@
-import { Divider, Column } from 'Component/widget/styles'
+import { Divider, Column } from '../../../Component/widget/styles'
 import { FeaturedProducts } from './styles'
 export const LabelName = () => {
      return (

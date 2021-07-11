@@ -1,13 +1,14 @@
-import { IProduct } from 'redux/Guest/GuestState.interface'
+import { IProduct } from '../Guest/GuestState.interface'
 export interface IItemCart extends IProduct {
-
-     quantity: number
+     quantity: number,
+     qty: number
+     product?: string
 }
 
 
 export interface ICartState {
-     cart: IItemCart[] | Object,
-     shippingAddress: Object
+     cart: IItemCart[],
+     shippingAddress: any
 }
 
 

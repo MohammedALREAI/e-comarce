@@ -1,10 +1,12 @@
 import React, { useState, CSSProperties } from 'react'
 import SwipeableViews from 'react-swipeable-views'
+import { Arrow, Dot } from '../../pages/Gust/HomeScreen/Home.styles'
 import { SliderItem } from './SliderItem'
-import { URL_IMAGES } from 'Const/env'
-import { IProduct } from 'redux/Guest/GuestState.interface'
-import { Column, InnerSection, Row } from 'Component/widget/styles'
-import { Arrow, Dot } from 'pages/Gust/HomeScreen/Home.styles'
+import { IProduct } from '../../redux/Guest/GuestState.interface'
+import { URL_IMAGES } from '../../Const/env'
+import { Column } from '../widget/Column'
+import { InnerSection, Row } from '../widget/styles'
+
 
 interface Props {
     data: IProduct[];
@@ -32,12 +34,12 @@ export const Slider = ({ data }: Props) => {
     const handleLeft = () => {
         if (sliderIndex === 0) {
             setSliderIndex(2)
-        }
-    }
+        } else setSliderIndex(sliderIndex - 1)
+}
     const handleRight = () => {
-        if (sliderIndex === 0) {
-            setSliderIndex(2)
-        }
+        if (sliderIndex === 2) {
+            setSliderIndex(0)
+        } else setSliderIndex(sliderIndex + 1)
     }
 
     const sliders =

@@ -41,8 +41,6 @@ export const schemaValidationSignUp =
                }),
      })
 
-
-
 export type schemaValidationSignUpType = Yup.InferType<typeof schemaValidationSignUp>
 
 
@@ -61,4 +59,14 @@ export const updateProfileSchema = Yup.object({
 })
 
 
+
+
 export type updateProfileSchemaType = Yup.InferType<typeof updateProfileSchema>
+
+export const ShippingSchema = Yup.object({
+     country: Yup.string().required('Please enter country name'),
+     city: Yup.string().required('Please enter city name'),
+     address: Yup.string().required('Please enter your address'),
+     postalCode: Yup.number().required('Please enter your zip code'),
+})
+export type TypeShippingSchema = Yup.InferType<typeof ShippingSchema>

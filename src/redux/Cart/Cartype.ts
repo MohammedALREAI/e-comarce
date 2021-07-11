@@ -2,6 +2,7 @@
 
 import { IItemCart } from './CartState.interface'
 import { Action } from 'redux'
+import { TypeShippingSchema } from '../../utils/validation'
 
 
 export enum EnumCartAction {
@@ -32,10 +33,10 @@ export interface AddItem extends Action<string> {
 /**
  * addingShoppingAddress
  */
-export interface addingShoppingAddress extends Action<string> {
+export interface AddingShoppingAddress extends Action<string> {
      type: EnumCartAction.ADD_SHIPPING_ADDRESS;
      payload: {
-          inputValues: {}
+          inputValues: TypeShippingSchema
 
      }
 
@@ -62,25 +63,11 @@ export interface Increase extends Action<string> {
 export interface Decrease extends Action<string> {
      type: EnumCartAction.DECREASE_COUNT;
      payload: {
-          itemCarts: IItemCart[] | [] | IItemCart
-
+          itemCarts: IItemCart[]
      }
 
 
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-export type ActionCartType = Decrease | Increase | Rest | DeleteItem | AddItem
+export type ActionCartType = Decrease | Increase | Rest | DeleteItem | AddItem | AddingShoppingAddress

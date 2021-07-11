@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom'
 import Styled from 'styled-components'
 
 
@@ -36,7 +37,7 @@ margin-right: 20px;
 opacity: 1;
 object-fit: cover;
 `
-export const UploadPhotoButton = Styled('button')`
+export const UploadPhotoButton = Styled(Link)`
 display:flex;
 justify-content:center;
 align-items:center;
@@ -102,7 +103,7 @@ margin-right:40px;
 margin-bottom:65px
 `
 
-export const ItemsList = Styled(UserNameProfile)`
+export const ItemsList = Styled(Link)`
 margin:15px 0px;
 font-size: 24px;
 letter-spacing: 0px;

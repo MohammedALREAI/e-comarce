@@ -61,7 +61,7 @@ export const NavBox = styled('div')`
     flex-direction: row;
     height: auto;
     justify-content: center;
-     width: 100%;
+     width: 30%;
 
 `
 
@@ -91,6 +91,7 @@ export const NavContainer = styled('nav')`
     display: flex;
     height: 85px;
     justify-content: center;
+    justify-content: space-between;
     opacity: 1;
     width:100%
 `
@@ -127,14 +128,14 @@ margin-left: 20px;
 opacity: 1;
 
 `
-export const LogoTextYellow = styled('p')`
+export const LogoTextYellow = styled(Link)`
 
 color: #FCDD06;
 font-size:40px;
 letter-spacing: 1.6px;
 opacity: 1;
 `
-export const LogoTextWhite = styled('p')`
+export const LogoTextWhite = styled(Link)`
 color: #FFFFFF;
 font-size:40px;
 letter-spacing: 1.6px;

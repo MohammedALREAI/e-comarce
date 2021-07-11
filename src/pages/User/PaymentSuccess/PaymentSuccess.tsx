@@ -52,7 +52,7 @@ export const PaymentSuccess = (props: Props) => {
 
 
             <RowWithRadius>
-                {Array(3).fill(0).map((x, i) => (
+                {/* {Array(3).fill(0).map((x, i) => (
 
                 <CardItem
                 key={i}
@@ -63,7 +63,7 @@ export const PaymentSuccess = (props: Props) => {
                 discount={10}
                 price={10}
                 />
-                ))}
+                ))} */}
 
 
 

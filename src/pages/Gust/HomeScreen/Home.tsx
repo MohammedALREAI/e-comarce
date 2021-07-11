@@ -2,35 +2,38 @@ import React, { useEffect } from 'react'
 import { TopRate } from '../TopRate/TopRate'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { SliceArray } from 'utils/SliceArray'
-import { GuestActions } from 'redux/Guest/GuestAction'
-import { TState } from 'redux/Store'
-import { SpinnerContainer } from 'Component/widget/styles'
-import { Slider } from 'Component/Slider/slider'
+import {
+  fetchProduct,
+  fetchSliderImage,
+  GuestActions,
+} from '../../../redux/Guest/GuestAction'
+import { TState } from '../../../redux/Store'
+import { SpinnerContainer } from '../../../Component/widget/styles'
+import { Slider } from '../../../Component/Slider/slider'
 import { FeaturedProducts } from '../FeaturedProducts/FeaturedProducts'
+import { ProductItem } from '../ProductItem/ProductItem'
 
 export const HomeScreen = () => {
-    const dispatch = useDispatch()
-    const { fetchSliderImage, fetchProduct } = bindActionCreators(GuestActions, dispatch)
+  const dispatch = useDispatch()
 
-    const { isLoading, sliderImages, products } = useSelector((state: TState) => state.gust)
-    const chunkSize = window.innerWidth > 1100 ? 3 : window.innerWidth > 800 ? 2 : 1
+  const state = useSelector((state: TState) => state)
 
-    const sliceArray = SliceArray(products, chunkSize)
-    useEffect(() => {
-        fetchSliderImage()
-        fetchProduct()
-    }, [dispatch])
+  useEffect(() => {
+    dispatch(fetchSliderImage())
+  }, [dispatch])
 
-    return isLoading
+  console.log('the slice isLoading', state.gust.isLoading)
+
+  return state.gust.isLoading
 ? (
-        <SpinnerContainer />
-    )
+    <SpinnerContainer />
+  )
 : (
-        <>
-            <Slider data={sliderImages} />
-            <FeaturedProducts data={sliceArray} />
-            <TopRate data={sliderImages} />
-        </>
-    )
+    <>
+
+      <Slider data={state.gust.sliderImages} />
+        <FeaturedProducts />
+        <TopRate data={state.gust.sliderImages} />
+    </>
+  )
 }

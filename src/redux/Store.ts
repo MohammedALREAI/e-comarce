@@ -1,3 +1,4 @@
+import { SearchReducer } from './Search/SearchRrducer'
 import { OrderReducer } from './Order/OrderReducer'
 import { CartReducer } from './Cart/CartRrducer'
 import { AppActions } from './types.d'
@@ -7,28 +8,27 @@ import thunk, { ThunkMiddleware } from 'redux-thunk'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { GuestReducer } from './Guest'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { FetchFeathersReducer } from './FeatuerPorduct/FeatuerPorductRrducer'
 
-const rootReducer = combineReducers({
+const reducers = combineReducers({
      user: UserReducer,
      gust: GuestReducer,
      cart: CartReducer,
      order: OrderReducer,
+     fetchFeathers: FetchFeathersReducer,
+     Search: SearchReducer,
 })
 
 
-const tempCart = localStorage.getItem('cart')
-const tempUser = localStorage.getItem('user')
-const tempShipping = localStorage.getItem('shipping')
-const userFromLocalStorage = tempUser ? JSON.parse(tempUser) : {}
-const shippingFromLocalStorage = tempShipping ? JSON.parse(tempShipping) : {}
+const userFromLocalStorage = JSON.parse(localStorage.getItem('user') || '{}')
+const shippingFromLocalStorage = JSON.parse(localStorage.getItem('shipping') || '{}')
+const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '{}')
+console.log('mms', userFromLocalStorage)
+export type TState = ReturnType<typeof reducers>
 
-const cartFromLocalStorage = tempCart ? JSON.parse(tempCart) : []
 
-export type TState = ReturnType<typeof rootReducer>
 
-const middleware = [promiseMiddleware, thunk as ThunkMiddleware<TState, AppActions>]
-
-const preloadedState = {
+const initialState = {
      user: {
           user: userFromLocalStorage,
      },
@@ -37,12 +37,24 @@ const preloadedState = {
           shippingAddress: shippingFromLocalStorage,
      },
 }
+console.log('data ----- ', initialState.user)
+
+const middleware = [thunk]
 
 const Store = createStore(
-     rootReducer,
-     preloadedState,
+     reducers,
+     initialState,
      composeWithDevTools(applyMiddleware(...middleware)),
 )
+export type AppDispatch = typeof Store.dispatch
 
 
+console.log('data -----2 ', initialState.user)
+
+console.log('data -----3 ', Store.getState())
+
+
+declare const Window: any
+
+Window.store = Store
 export default Store

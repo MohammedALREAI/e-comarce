@@ -1,0 +1,1 @@
+import { ActionFetchFeather } from './FeatuerPorductType'

@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable arrow-spacing */
+import { IProduct } from '../../redux/Guest/GuestState.interface'
 import { Dispatch } from 'redux'
 import { TState } from '../Store'
 import { IItemCart } from './CartState.interface'
 import { ActionCartType, EnumCartAction } from './Cartype'
+import { TypeShippingSchema } from '../../utils/validation'
 
 
 
@@ -17,19 +21,20 @@ import { ActionCartType, EnumCartAction } from './Cartype'
 
 
 const addItem = (product: IProduct, quantity: number) => {
-     return async (dispatch: Dispatch<ActionCartType>, getState: () => TState) => {
+     return async (dispatch: any, getState: () => TState) => {
           const cart = getState().cart.cart
 
 
-          const isFound = cart.find(item => item._id === product._id)
+          const isFound = cart.find((item: any) => item._id === product._id)
 
           if (isFound) {
                const newProductWithQuantity: IItemCart = {
                     ...product,
                     quantity,
+                    qty: quantity,
                }
 
-               const indexProduct = cart.findIndex(item => item._id === newProductWithQuantity._id)
+               const indexProduct = cart.findIndex((item: any) => item._id === newProductWithQuantity._id)
 
                cart[indexProduct] = newProductWithQuantity
 
@@ -41,6 +46,8 @@ const addItem = (product: IProduct, quantity: number) => {
                const newProductWithquantity: IItemCart = {
                     ...product,
                     quantity,
+                    qty: quantity,
+                    product: product._id,
                }
                dispatch({
                     type: EnumCartAction.ADD_ITEM,
@@ -50,7 +57,7 @@ const addItem = (product: IProduct, quantity: number) => {
                })
           }
 
-          localStorage.setItem('cart', JSON.stringify(cart))
+          localStorage.setItem('cart', JSON.stringify(getState().cart.cart))
      }
 }
 
@@ -70,18 +77,19 @@ const decreesItem = (product: IItemCart, quantity = 1) => {
           const cart = getState().cart.cart
 
 
-          const isFound = cart.find(item => item._id === product._id)
+          const isFound = cart.find((item: any) => item._id === product._id)
 
           if (isFound) {
                isFound.quantity -= quantity
-               const index = cart.findIndex((item) => item._id === isFound._id)
+               isFound.qty -= quantity
+               const index = cart.findIndex((item: any) => item._id === isFound._id)
 
 
                cart[index] = isFound
                dispatch({
                     type: EnumCartAction.DECREASE_COUNT,
                     payload: {
-                         itemCarts: cart,
+                         itemCarts: getState().cart.cart,
                     },
                })
           }
@@ -95,14 +103,16 @@ const decreesItem = (product: IItemCart, quantity = 1) => {
 
 export const deleteItem = (id: string) => (dispatch: Dispatch<ActionCartType>, getState: () => TState) => {
      dispatch({
-          type: DELETE_CART_ITEM,
-          payload: id,
+          type: EnumCartAction.DELETE_ITEM,
+          payload: {
+               _id: id,
+          },
      })
      localStorage.setItem('cart', JSON.stringify(getState().cart.cart))
 }
 
 
-export const addShippingAddress = (values) => {
+export const addShippingAddress = (values: TypeShippingSchema) => {
      localStorage.setItem('shipping', JSON.stringify(values))
 
      return {

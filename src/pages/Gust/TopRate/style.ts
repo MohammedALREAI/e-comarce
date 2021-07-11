@@ -1,4 +1,4 @@
-import { Row } from 'Component/widget/styles'
+import { Row } from '../../../Component/widget/styles'
 import styled from 'styled-components'
 
 export const RowWithRadius = styled(Row)`

@@ -2,11 +2,6 @@ import styled from 'styled-components'
 import { Column, Row, Button } from '../../../Component/widget/styles'
 
 
-
-
-
-
-
 export const WrapperCardPayment = styled(Column)`
 background: #FCDD06 ;
 border-radius: 10px;
@@ -14,7 +9,7 @@ height: 62px;
 padding: 25px 30px;
 
 `
-export const ButtonCounter = styled(Button)<{isActive?:boolean}>`
+export const ButtonCounter = styled(Button) <{ isActive?: boolean }>`
 background:#FFFFFF
 border: ${props => props.isActive ? '3px solid #FCDD06' : '1px solid #FCDD06'};
 color:#000000;
@@ -45,7 +40,7 @@ cursor: pointer;
 export const CheckoutButton = styled(Button)`
 width: 324px;
 height: 62px;
-background: #FCDD06 
+background: #FCDD06
 border-radius: 10px;
 color: #242424;
 text-transform: capitalize;

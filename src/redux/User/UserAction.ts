@@ -1,8 +1,13 @@
+import { schemaValidationSignUpType } from '../../utils/validation'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Dispatch } from 'redux'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { User } from './shapeState.interface'
-import { EnumUserAction, LoginData, ProfileAction, SighupData, SignupAction, ActionUser, LoginAction } from './userType'
+import { EnumUserAction, LoginData, ProfileAction, ActionUser } from './userType'
 import { TState } from '../Store'
+
+import * as H from 'history'
+import { DefinedNumberSchema } from 'yup/lib/number'
 const USER_LOGIN_URL = '/users/login'
 const USER_SUIGNUP_URL = '/users'
 const GET_POFILE_URL = '/users/profile'
@@ -13,31 +18,64 @@ const GET_POFILE_URL = '/users/profile'
  * @returns  the the  action contaions the data and type
  *
  */
-const loginAction = (userData: LoginData, history: any) => {
-     return async (dispatch: Dispatch<LoginAction>) => {
+// const loginAction = (userData: LoginData, history: H.History<any>) => {
+//      return async (dispatch: any) => {
+//           /*** enter the login statrt wich will be convert the loading  to it   */
+//           dispatch({
+//                type: EnumUserAction.USER_LOGIN_START,
+//           })
+
+//           try {
+//                const response = await axios.post(USER_LOGIN_URL, userData)
+//                console.log(response)
+//                localStorage.setItem('user', JSON.stringify(response.data))
+
+//                dispatch({
+//                     type: EnumUserAction.USER_LOGIN_SUCCESS,
+//                     payload: response.data,
+//                })
+//                history.push('/')
+//           } catch (error) {
+//                const err = error as AxiosError
+//                if (err.response && err.response.data.message) {
+//                     dispatch({
+//                          type: EnumUserAction.USER_LOGIN_FILL,
+//                          payload: err.response.data.message,
+//                     })
+//                } else {
+//                     throw new Error('An internal error occurred 500')
+//                }
+//           }
+//      }
+// }
+
+
+export const loginAction = (userData: LoginData, history: any) => {
+     return async (dispatch: Dispatch<ActionUser>) => {
           /*** enter the login statrt wich will be convert the loading  to it   */
           dispatch({
                type: EnumUserAction.USER_LOGIN_START,
           })
 
           try {
-               const response = await axios.post(USER_LOGIN_URL, userData)
+               const response = await axios.post('/users/login', userData)
                localStorage.setItem('user', JSON.stringify(response.data))
 
                dispatch({
                     type: EnumUserAction.USER_LOGIN_SUCCESS,
-                    payload: response.data as User,
+                    payload: {
+                         user: response.data,
+                    },
                })
-               history.push('/')
+               history.push('/profile')
           } catch (e: any) {
                dispatch({
                     type: EnumUserAction.USER_LOGIN_FILL,
-                    payload: '' + e.response.data.message,
+                    payload: 'thrre is some erro',
                })
           }
      }
 }
-
 
 
 
@@ -46,32 +84,42 @@ const loginAction = (userData: LoginData, history: any) => {
  * @param data
  * @returns
  */
-const singUpSuccess = (data: SighupData, history: any) => {
-     return async (dispatch: Dispatch<SignupAction>) => {
+export const singUpSuccess = (data: schemaValidationSignUpType, history: H.History<any>) => {
+     return async (dispatch: Dispatch<ActionUser>) => {
           dispatch({
                type: EnumUserAction.USER_SIGHUP_START,
           })
 
           try {
-               const response = await axios.post(USER_SUIGNUP_URL, data)
+               const response = await axios.post('/users', data)
+               console.log('me response', response)
                localStorage.setItem('user', JSON.stringify(response.data))
+               console.log('the datais ', response)
 
                dispatch({
                     type: EnumUserAction.USER_SIGHUP_SUCCESS,
-                    payload: response.data as User,
+                    payload: response.data,
                })
 
-               console.log(response.data)
                history.push('/')
-          } catch (e: any) {
-               dispatch({
-                    type: EnumUserAction.USER_SIGHUP_FILL,
-                    payload: '' + e.response.data.message,
-               })
+          } catch (error) {
+               const err = error as AxiosError
+               console.log('myass', err)
+               // e.response.data.message
+               if (err.response) {
+                    dispatch({
+                         type: EnumUserAction.USER_SIGHUP_FILL,
+                         payload: {
+                              error: err.response.data.message,
+                         },
+                    })
+               } else {
+                    throw new Error('An internal error occurred 500')
+               }
           }
      }
 }
-const logoutSuccess = () => {
+export const logoutSuccess = () => {
      return (dispatch: Dispatch<ActionUser>) => {
           dispatch({ type: EnumUserAction.USER_LOGOUT })
           localStorage.removeItem('user')
@@ -89,7 +137,7 @@ const logoutSuccess = () => {
 
 
 export const getProfile = () => {
-     return async (dispatch: Dispatch<ProfileAction>, getState: () => TState) => {
+     return async (dispatch: any, getState: () => TState) => {
           dispatch({
                type: EnumUserAction.GET_PROFILE_START,
           })
@@ -103,6 +151,7 @@ export const getProfile = () => {
                          Authorization: `Bearer ${token}`,
                     },
                })
+
 
                dispatch({
                     payload: response.data,
@@ -118,17 +167,8 @@ export const getProfile = () => {
 }
 
 
-interface updateProfileValue {
-     name?: string,
-     email?: string,
-     password?: string,
-     confirmPassword?: string
-
-}
-
-
-export const updateProfile = (value: updateProfileValue, history: any) => {
-     return async (dispatch: Dispatch<ProfileAction>, getState: () => TState) => {
+export const updateProfile = (values: Partial<schemaValidationSignUpType>, history: any) => {
+     return async (dispatch: any, getState: () => TState) => {
           dispatch({
                type: EnumUserAction.UPDATE_PROFILE_START,
           })
@@ -152,6 +192,7 @@ export const updateProfile = (value: updateProfileValue, history: any) => {
                     payload: response.data,
                     type: EnumUserAction.UPDATE_PROFILE_SUCCESS,
                })
+               history.push('/profile')
           } catch (e: any) {
                dispatch({
                     payload: e?.response?.data?.message,
@@ -160,6 +201,49 @@ export const updateProfile = (value: updateProfileValue, history: any) => {
           }
      }
 }
+
+
+
+
+
+
+export const addReivw = (values: Partial<schemaValidationSignUpType>, history: any) => {
+     return async (dispatch: any, getState: () => TState) => {
+          dispatch({
+               type: EnumUserAction.ADD_REVIEW_START,
+          })
+
+
+          const token = getState().user.user.token as string
+
+
+          try {
+               const response = await axios.put(GET_POFILE_URL, {
+                    headers: {
+                         'Content-Type': 'application/json',
+                         Authorization: `Bearer ${token}`,
+                    },
+               })
+
+               localStorage.setItem('user', JSON.stringify(response.data))
+
+
+               dispatch({
+                    payload: response.data,
+                    type: EnumUserAction.ADD_REVIEW_SUCCESS,
+               })
+               history.push('/profile')
+          } catch (e: any) {
+               dispatch({
+                    payload: e?.response?.data?.message,
+                    type: EnumUserAction.ADD_REVIEW_FILL,
+               })
+          }
+     }
+}
+
+
+
 
 
 

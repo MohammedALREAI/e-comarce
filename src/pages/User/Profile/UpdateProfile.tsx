@@ -1,54 +1,58 @@
 import React, { useEffect } from 'react'
-import { Label, InputField, SpanError, ButtonLogin } from 'Component/Form/Form.style'
-import { Column, SpinnerContainer, InnerSection } from 'Component/widget/styles'
-import { Form, useFormik } from 'formik'
-import { LoginText } from 'pages/Auth/Login/login.style'
-
-import { Link } from 'react-router-dom'
-
+import { Label, InputField, SpanError, ButtonLogin } from '../../../Component/Form/Form.style'
+import { Column, SpinnerContainer, InnerSection } from '../../../Component/widget/styles'
+import { Form, useFormik, FormikProvider } from 'formik'
+import { LoginText } from '../../../pages/Auth/Login/login.style'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-
 import { bindActionCreators } from 'redux'
-import { updateProfileSchema as validationSchema, updateProfileSchemaType } from '../../../utils/validation'
-import { UserActions } from 'redux/User'
-import { TState } from 'redux/Store'
+import {
+  updateProfileSchema as validationSchema,
+  updateProfileSchemaType,
+} from '../../../utils/validation'
+import { UserActions } from '../../../redux/User'
+import { TState } from '../../../redux/Store'
+import { getProfile, updateProfile } from '../../../redux/User/UserAction'
+
+
 export const UpdateProfile = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const user = useSelector((store: TState) => store.user)
-    const { updateProfile, getProfile } = bindActionCreators(UserActions, dispatch)
     const { error, isLoading } = user
 
 
     useEffect(() => {
-        getProfile()
+        dispatch(getProfile())
     }, [dispatch])
 
-    const initialValues: updateProfileSchemaType = {
-        email: (user.userProfile?.user?.email) as string | '',
-        password: '',
-        name: (user.userProfile?.user?.name) as string | '',
-        passwordConfirmation: '',
-
-    }
+     // eslint-disable-next-line no-lone-blocks
+     { (user.userProfile?.isLoading) && <SpinnerContainer /> }
 
 
-    const formik = useFormik<updateProfileSchemaType>({
+   const initialValues: updateProfileSchemaType = {
+     email: user.userProfile?.user?.email || '',
+     password: '',
+     name: user.userProfile?.user?.name as string | '',
+     passwordConfirmation: '',
+   }
+     const formik = useFormik < updateProfileSchemaType >({
         initialValues,
         onSubmit: async (values) => {
-            updateProfile(values, history)
+            dispatch(updateProfile(values, history))
         },
         validationSchema,
     })
 
+     console.log('userdata', user.userProfile?.user?.email)
 
-    return user.userProfile?.isLoading
-? (<SpinnerContainer />)
-        : (<Column bg="#FFFFFF" height={948}>
+
+         return (
+          < Column bg = "#FFFFFF" height = { 948} >
         <InnerSection bg="#FFFFFF">
         <Column>
-            <LoginText>Update  your Profile</LoginText>
+                        <LoginText>Update  your Profile</LoginText>
+                        <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
                 <Column mt={-10}>
                     <Label htmlFor="name">Name</Label>
@@ -94,8 +98,9 @@ export const UpdateProfile = () => {
 
                 </Column>
 
-                <ButtonLogin disabled={isLoading} type="submit">Sign up</ButtonLogin>
+                <ButtonLogin disabled={isLoading} type="submit">Update Profile</ButtonLogin>
             </Form>
+                </FormikProvider>
         </Column>
       </InnerSection>
         </Column>

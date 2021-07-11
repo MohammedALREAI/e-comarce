@@ -2,47 +2,66 @@ import { Action } from 'redux'
 import { User } from './shapeState.interface'
 
 
-export enum EnumUserAction{
+export enum EnumUserAction {
 
 
-    // HANDLE WITH SUIGNUP
-USER_SIGHUP_SUCCESS = 'USER_SIGHUP_SUCCESS',
-USER_SIGHUP_START = 'USER_SIGHUP_START',
-USER_SIGHUP_FILL = 'USER_SIGHUP_FILL',
-    // HANDLE WITH LOGIN
+     // HANDLE WITH SUIGNUP
+     USER_SIGHUP_SUCCESS = 'USER_SIGHUP_SUCCESS',
+     USER_SIGHUP_START = 'USER_SIGHUP_START',
+     USER_SIGHUP_FILL = 'USER_SIGHUP_FILL',
+     // HANDLE WITH LOGIN
 
 
-USER_LOGIN_START = 'USER_LOGIN_START',
-USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS',
-USER_LOGIN_FILL = 'USER_LOGIN_FILL',
-
-
-GET_PROFILE_START = 'GET_PROFILE_START',
-GET_PROFILE_SUCCESS = 'GET_PROFILE_SUCCESS',
-GET_PROFILE_FILL = 'GET_PROFILE_FILL',
-
-UPDATE_PROFILE_START = 'UPDATE_PROFILE_START',
-UPDATE_PROFILE_SUCCESS = 'UPDATE_PROFILE_SUCCESS',
-UPDATE_PROFILE_FILL = 'UPDATE_PROFILE_FILL',
+     USER_LOGIN_START = 'USER_LOGIN_START',
+     USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS',
+     USER_LOGIN_FILL = 'USER_LOGIN_FILL',
 
 
 
-// HANDLE WITH LOGOUT
-USER_LOGOUT = 'USER_LOGOUT'
+     /***  GET_PROFILE_START */
+
+     GET_PROFILE_START = 'GET_PROFILE_START',
+     GET_PROFILE_SUCCESS = 'GET_PROFILE_SUCCESS',
+     GET_PROFILE_FILL = 'GET_PROFILE_FILL',
+
+
+
+     /***
+      * UPDATE_PROFILE_START
+      */
+     UPDATE_PROFILE_START = 'UPDATE_PROFILE_START',
+     UPDATE_PROFILE_SUCCESS = 'UPDATE_PROFILE_SUCCESS',
+     UPDATE_PROFILE_FILL = 'UPDATE_PROFILE_FILL',
+
+
+
+     /***  ADD_REVIEW_START
+      *
+     */
+     ADD_REVIEW_START = 'ADD_REVIEW_START',
+     ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS',
+     ADD_REVIEW_FILL = 'ADD_REVIEW_FILL',
+
+/**USER_LOGOUT */
+
+
+
+     // HANDLE WITH LOGOUT
+     USER_LOGOUT = 'USER_LOGOUT'
 
 }
 
 
-export interface LoginData{
-    email:string,
-    password:string
+export interface LoginData {
+     email: string,
+     password: string
 }
 
 
 
 
-export interface SighupData extends LoginData{
-    name:string;
+export interface SighupData extends LoginData {
+     name: string;
 }
 
 
@@ -60,20 +79,24 @@ export interface SighupData extends LoginData{
  */
 
 
+
+
+
+
 export interface getProfileSuccess extends Action<string> {
-    type: EnumUserAction.GET_PROFILE_SUCCESS;
-    payload:User
+     type: EnumUserAction.GET_PROFILE_SUCCESS;
+     payload: User
 
 }
 
 export interface getProfileStart extends Action<string> {
-    type: EnumUserAction.GET_PROFILE_START;
+     type: EnumUserAction.GET_PROFILE_START;
 
 }
 
 export interface getProfileFill extends Action<string> {
-    type: EnumUserAction.GET_PROFILE_FILL;
-    payload:string
+     type: EnumUserAction.GET_PROFILE_FILL;
+     payload: string
 
 }
 
@@ -84,18 +107,18 @@ export interface getProfileFill extends Action<string> {
  */
 
 
- export interface updateProfileFill extends Action<string> {
-    type: EnumUserAction.UPDATE_PROFILE_FILL;
-    payload:string
+export interface updateProfileFill extends Action<string> {
+     type: EnumUserAction.UPDATE_PROFILE_FILL;
+     payload: string
 
 }
- export interface updateProfileSuccess extends Action<string> {
-    type: EnumUserAction.UPDATE_PROFILE_SUCCESS;
-    payload:User
+export interface updateProfileSuccess extends Action<string> {
+     type: EnumUserAction.UPDATE_PROFILE_SUCCESS;
+     payload: User
 
 }
- export interface updateProfileStart extends Action<string> {
-    type: EnumUserAction.UPDATE_PROFILE_START;
+export interface updateProfileStart extends Action<string> {
+     type: EnumUserAction.UPDATE_PROFILE_START;
 
 }
 
@@ -110,26 +133,28 @@ export interface getProfileFill extends Action<string> {
 
 
 export interface SignupActionSuccess extends Action<string> {
-    type: EnumUserAction.USER_SIGHUP_SUCCESS;
-    payload:User
+     type: EnumUserAction.USER_SIGHUP_SUCCESS;
+     payload: User
 
 }
 export interface SignupActionFill extends Action<string> {
-    type: EnumUserAction.USER_SIGHUP_FILL;
-    payload:string
+     type: EnumUserAction.USER_SIGHUP_FILL;
+     payload: {
+          error: string
+     }
 
 }
 export interface SignupActionStart extends Action<string> {
-    type: EnumUserAction.USER_SIGHUP_START;
+     type: EnumUserAction.USER_SIGHUP_START;
 
 }
 
 
- /**
-  *  ALL TYPE OF ACCION SFOR TTHE SUNGIN UP
-  */
+/**
+ *  ALL TYPE OF ACCION SFOR TTHE SUNGIN UP
+ */
 
- export type SignupAction = SignupActionSuccess | SignupActionFill | SignupActionStart
+export type SignupAction = SignupActionSuccess | SignupActionFill | SignupActionStart
 
 
 // hint the user login need data with the logout no need data
@@ -140,32 +165,34 @@ export type ProfileAction = getProfileSuccess | getProfileStart | getProfileFill
 
 
 
- /**
-  *     ALL TYPE OF ACCION  TTHE LOGIN  UP
-  */
+/**
+ *     ALL TYPE OF ACCION  TTHE LOGIN  UP
+ */
 export interface LoginActionSuccess extends Action<string> {
-    type: EnumUserAction.USER_LOGIN_SUCCESS;
-    payload:User
+     type: EnumUserAction.USER_LOGIN_SUCCESS;
+     payload: {
+          user: User
+     }
 
 }
 export interface LoginActionStart extends Action<string> {
-    type: EnumUserAction.USER_LOGIN_START;
+     type: EnumUserAction.USER_LOGIN_START;
 
 }
 export interface LoginActionFill extends Action<string> {
-    type: EnumUserAction.USER_LOGIN_FILL;
-    payload:string
+     type: EnumUserAction.USER_LOGIN_FILL;
+     payload: string
 }
 
 
-     export type LoginAction = LoginActionSuccess | LoginActionStart | LoginActionFill;
+export type LoginAction = LoginActionSuccess | LoginActionStart | LoginActionFill;
 
 
 /**
  * logout no need te dat payload
  */
 export interface LogoutAction extends Action<string> {
-    type: EnumUserAction.USER_LOGOUT;
+     type: EnumUserAction.USER_LOGOUT;
 }
 
 

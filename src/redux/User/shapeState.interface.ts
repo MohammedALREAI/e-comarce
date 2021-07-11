@@ -14,7 +14,7 @@ export default interface IUserState {
      success?: boolean,
      user: User | any,
      userProfile?: {
-          user?: User,
+          user?: User | any,
           isLoading?: boolean,
           success?: boolean,
           error?: string,

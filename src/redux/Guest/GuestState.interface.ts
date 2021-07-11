@@ -1,25 +1,19 @@
 
-
-
 export interface IProduct {
-
-     _id: string
+     _id: string,
      brand: string,
-     category: string
-     countInStock: number
-     createdAt: string
-     description: string
-     image: string
-     name: string
-     numReviews: number
-     price: number
-     rating: number
-     reviews: Array<Review>
+     category: string,
+     countInStock: number,
+     createdAt: string,
+     description: string,
+     image: string,
+     name: string,
+     numReviews: number,
+     price: number,
+     rating: number,
+     reviews?: Array<Review>,
      updatedAt: string,
-     brand: string
-     category: string
-     countInStock: number
-     user: string
+     user: string,
 }
 
 
@@ -38,18 +32,25 @@ interface Review {
 }
 
 
-
-
 export interface IGuestState {
 
      sliderImages: IProduct[],
-     products: IProduct[],
      isLoading?: boolean,
-     error: string,
+     error?: string,
      product: {
-          product: IProduct,
+          product?: IProduct | any,
           isLoading?: boolean,
           error?: string,
 
      }
 }
+
+
+
+// {
+//      products: any[],
+//           page: number,
+//                pages: number,
+//                     isLoading: boolean
+//      error: string
+// }

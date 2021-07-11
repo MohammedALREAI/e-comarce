@@ -49,7 +49,7 @@ export const UserReducer = (state = initialState, action: ActionUser): IUserStat
           case EnumUserAction.USER_SIGHUP_FILL:
                return {
                     ...state,
-                    error: action.payload,
+                    error: action.payload.error,
                     isLoading: false,
 
                }
@@ -69,7 +69,7 @@ export const UserReducer = (state = initialState, action: ActionUser): IUserStat
           case EnumUserAction.USER_LOGIN_SUCCESS:
                return {
                     ...state,
-                    user: action.payload as User,
+                    user: action.payload.user,
                     isLoading: false,
                     success: true,
 

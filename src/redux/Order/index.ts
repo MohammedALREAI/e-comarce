@@ -1,2 +1,1 @@
-export { ActionOrderPlace } from './OrderType'
-export { UserReducer } from './OrderReducer'
+export { OrderReducer } from './OrderReducer'

@@ -1,16 +1,8 @@
- { 
-  
+ {
+
   "compilerOptions": {
-     "baseUrl": "src",
-     "paths": {
-       "@/redux/*": ["src/redux"],
-       "@/theme/*": ["src/Theme"],
-       "@/components/*": ["src/Component/*"],
-       "@/pages/*": ["src/pages/*"],
-       "@/assets/*": ["src/Assets/*"],
-       "@/layout/*": ["src/Layout/*"],
- 
-     },
+        "baseUrl": ".",
+
      "types": [
        "node"
      ],
@@ -48,19 +40,7 @@
      "noEmit": true,
      "jsx": "react-jsx"
    }
- ,
- 
- 
- "include": [
-     "src/.env.d.ts",
-     "env.d.ts",
-     "**/*.ts",
-     "**/*.tsx",
-     "src/**/*"
-   ],
-   "exclude": [
-     "node_modules"
-   ]
- 
- 
+
+
+
  }

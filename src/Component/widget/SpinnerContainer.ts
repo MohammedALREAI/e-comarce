@@ -7,8 +7,7 @@ export const SpinnerContainer = Styled.div`
   box-sizing: border-box;
   border-radius: 50%;
   border-top-color: #ddd;
-  margin-top: 20%;
-  margin:20% auto
+  margin:30% auto;
   animation: spin 3s ease-in-out infinite;
   -webkit-animation: spin 1s ease-in-out infinite;
   @keyframes spin {
