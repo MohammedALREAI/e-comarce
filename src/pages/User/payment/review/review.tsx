@@ -21,7 +21,7 @@ interface IInitialValues{
     stress: '',
  }
 
-export const Review = () => {
+ const Review = () => {
     const formik = useFormik<IInitialValues>({
         initialValues,
         onSubmit: values => {
@@ -176,3 +176,6 @@ export const Review = () => {
             </Column>
     )
 }
+
+
+export default Review

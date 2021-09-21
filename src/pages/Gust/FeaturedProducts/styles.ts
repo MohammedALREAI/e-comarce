@@ -7,7 +7,6 @@ align-items:center;
 text-decoration: none
 align-items: center;
   background: #FFFFFF;
-  color:#242424;
   border-radius: 16px;
   box-shadow:  4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   color:#242424;
@@ -15,8 +14,9 @@ align-items: center;
   flex-direction: column;
   height: 655px;
   justify-content: center;
+  overflow:hidden;
   opacity: 1;
-width: 520px;
+  width: 520px;
 &:first-child and :last-child{
     margin: 0 0;
 }
@@ -129,7 +129,6 @@ export const WrapperRow = styled(Row)`
 align-items: center;
     display: flex;
     justify-content: center;
-margin: 0px 20px;
 `
 
 
@@ -147,12 +146,13 @@ align-items: center;
   background: #FFFFFF;
   border-radius: 16px;
   color:#242424;
+  overflow:hidden;
   display: flex;
   color:#242424;
   flex-direction: column;
   height: 100%;
   justify-content: center;
-width: 100%;
+ width: 100%;
 &:first-child and :last-child{
     margin: 0 0;
 }

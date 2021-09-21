@@ -1,5 +1,5 @@
 import { IGuestState } from './GuestState.interface'
-import { EnumGuestAction } from './GuestType'
+import { ActionGuest, EnumGuestAction } from './GuestType'
 
 
 
@@ -19,7 +19,7 @@ const initialState: IGuestState = {
 
 
 
-export const GuestReducer = (state = initialState, action: any): IGuestState => {
+export const GuestReducer = (state = initialState, action: ActionGuest): IGuestState => {
      switch (action.type) {
           case EnumGuestAction.GET_SLIDER_IMAGES_START:
 

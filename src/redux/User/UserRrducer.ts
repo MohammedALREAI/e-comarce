@@ -3,31 +3,18 @@ import IUserState, { User } from './shapeState.interface'
 
 
 
-
+const temp = localStorage.getItem('user')
+const user = temp ? JSON.parse(temp) : {}
+console.log('useris', user)
 const initialState: IUserState = {
-     user: {
-          _id: '',
-          email: '',
-          token: '',
-          name: '',
-     },
+
      userProfile: {
-          user: {
-               _id: '',
-               email: '',
-               token: '',
-               name: '',
-          },
+          user: {},
           isLoading: false,
           success: false,
           error: '',
-
      },
-     success: false,
-     isLoading: false,
-     error: '',
 }
-
 
 
 
@@ -36,104 +23,50 @@ export const UserReducer = (state = initialState, action: ActionUser): IUserStat
      switch (action.type) {
           // START ALL STATUS OF THE  DIGNUP
 
-          case EnumUserAction.USER_SIGHUP_START:
-               return { ...state, isLoading: true }
-          case EnumUserAction.USER_SIGHUP_SUCCESS:
-               return {
-                    ...state,
-                    user: action.payload,
-                    isLoading: false,
-                    success: true,
-
-               }
-          case EnumUserAction.USER_SIGHUP_FILL:
-               return {
-                    ...state,
-                    error: action.payload.error,
-                    isLoading: false,
-
-               }
-
-          // FINS ALL STATUS OF THE  DIGNUP
-
-
-          /**START THE LOGIN  STATUS   */
-
-          case EnumUserAction.USER_LOGIN_START:
-               return {
-                    ...state,
-                    isLoading: true,
-
-               }
-
-          case EnumUserAction.USER_LOGIN_SUCCESS:
-               return {
-                    ...state,
-                    user: action.payload.user,
-                    isLoading: false,
-                    success: true,
-
-               }
-
-          case EnumUserAction.USER_LOGIN_FILL:
-               return {
-                    ...state,
-                    error: action.payload,
-                    isLoading: true,
-
-               }
-          /**END  THE LOGIN  STATUS   */
-
-          /**LOGOUT  THE LOGIN  STATUS   */
-
-
-
-          /** get User */
-
-
           case EnumUserAction.GET_PROFILE_START:
                return {
-                    ...state,
                     userProfile: {
+                         ...state.userProfile,
                          isLoading: true,
                     },
                }
 
           case EnumUserAction.GET_PROFILE_SUCCESS:
                return {
-                    ...state,
                     userProfile: {
-                         user: action.payload,
+                         error: '',
+                         user: action.payload.user,
                          isLoading: false,
                          success: true,
+
                     },
                }
           case EnumUserAction.GET_PROFILE_FILL:
                return {
-                    ...state,
                     userProfile: {
-                         error: action.payload as string,
+                         ...initialState.userProfile,
                          isLoading: false,
+                         error: action.payload.error,
                     },
+
                }
 
 
 
-          /** update user  */
 
           case EnumUserAction.UPDATE_PROFILE_START:
                return {
-                    ...state,
                     userProfile: {
+                         ...state.userProfile,
                          isLoading: true,
                     },
                }
 
           case EnumUserAction.UPDATE_PROFILE_SUCCESS:
                return {
-                    ...state,
                     userProfile: {
-                         user: action.payload as User,
+                         error: '',
+                         user: action.payload.user,
                          isLoading: false,
                          success: true,
                     },
@@ -141,25 +74,14 @@ export const UserReducer = (state = initialState, action: ActionUser): IUserStat
 
           case EnumUserAction.UPDATE_PROFILE_FILL:
                return {
-                    ...state,
                     userProfile: {
-                         error: action.payload,
+                         ...initialState.userProfile,
+                         error: action.payload.error,
                          isLoading: false,
                     },
                }
 
-
-
-
-
-          /** end get uswr  */
-
-          case EnumUserAction.USER_LOGOUT:
-               return {
-                    ...state,
-                    user: { ...state.user },
-               }
           default:
-               return initialState
+               return state
      }
 }

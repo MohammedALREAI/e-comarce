@@ -99,6 +99,5 @@
     "*.{js,json,css,scss,md,ts,html}": [
       "yarn lint --uncommitted"
     ]
-  },
-  "proxy": "https://proshop-ms.herokuapp.com/api"
+  }
 }

@@ -19,10 +19,8 @@ import LoginImage from '../../../Assets/Images/login.png'
 import Checkbox from '@material-ui/core/Checkbox'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import { UserActions } from '../../../redux/User/index'
-import { bindActionCreators } from 'redux'
+import { AuthActions } from '../../../redux/Auth/index'
 import { TState } from '../../../redux/Store'
-import { loginAction } from '../../../redux/User/UserAction'
 
 interface IInitialValues {
   email: string;
@@ -33,14 +31,14 @@ const initialValues: IInitialValues = {
   password: '',
 }
 
-export const Login = () => {
+ const Login = () => {
   const [checked, setChecked] = useState<boolean>(true)
   const history = useHistory()
 
   const dispatch = useDispatch()
-  const user = useSelector((state: TState) => state.user)
+  const auth = useSelector((state: TState) => state.auth)
 
-  const { error, isLoading } = user
+  const { error, isLoading } = auth
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked)
@@ -49,7 +47,7 @@ export const Login = () => {
   const formik = useFormik<IInitialValues>({
     initialValues,
     onSubmit: async (values) => {
-      dispatch(loginAction(values, history))
+      dispatch(AuthActions.loginAction(values, history))
     },
     validationSchema,
   })
@@ -93,9 +91,9 @@ export const Login = () => {
                     )
 : null}
 
-                    {error && <SpanError>{error}</SpanError>}
+                    {auth.error && <SpanError>{auth.error}</SpanError>}
                   </Column>
-                  <ButtonLogin disabled={isLoading} type="submit" iSDisabled={isLoading}>
+                  <ButtonLogin disabled={auth.isLoading} type="submit" iSDisabled={auth.isLoading}>
                     Login
                   </ButtonLogin>
                 </Form>
@@ -123,3 +121,4 @@ export const Login = () => {
     </Column>
   )
 }
+export default Login

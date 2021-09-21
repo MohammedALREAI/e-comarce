@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { TState } from '../../../redux/Store'
-import { singUpSuccess } from '../../../redux/User/UserAction'
+import { AuthActions } from '../../../redux/Auth'
 
 const initialValues: schemaValidationSignUpType = {
   email: '',
@@ -29,18 +29,17 @@ const initialValues: schemaValidationSignUpType = {
   passwordConfirmation: '',
 }
 
-export const Signup = () => {
+ const Signup = () => {
   const history = useHistory()
 
   const dispatch = useDispatch()
-  const user = useSelector((state: TState) => state.user)
-
+  const user = useSelector((state: TState) => state.auth)
   const { error, isLoading } = user
   const formSingUp = useFormik<schemaValidationSignUpType>({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      dispatch(singUpSuccess(values, history))
+      dispatch(AuthActions.singUpSuccess(values, history))
     },
   })
   return (
@@ -132,3 +131,4 @@ export const Signup = () => {
     </Column>
   )
 }
+export default Signup

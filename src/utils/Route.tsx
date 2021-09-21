@@ -1,17 +1,24 @@
-// import { Component, ReactNode } from 'react'
-// import { Route, Redirect } from 'react-router-dom'
+import React, { Component, ReactNode, ComponentType } from 'react'
+import { Route, Redirect, RouteComponentProps } from 'react-router-dom'
+import { RouteProps } from 'react-router'
+import { useToken } from './useToken'
 
-// const PrivateRoute = ({ component: any, ...rest }) => {
-//   const _id = JSON.parse(localStorage.getItem('user') || '{}')._id
-//   if (_id) {
-//     return <Route {...rest} component={(props) => <Component {...props} />} />
-//   } else {
-//     return <Redirect to="/login" />
-//   }
-// }
-
-// export default PrivateRoute
-
-export const me = () => {
-  return 'e'
+interface IPrivateRoute extends RouteProps {
+  token: boolean;
+  Component: React.LazyExoticComponent<() => JSX.Element>
 }
+
+const PrivateRoute = ({ component: Component, ...rest }: any) => {
+    const token = useToken()
+
+    return (
+      <Route
+        {...rest}
+        render={(props) => {
+          return token ? <Component {...props} /> : <Redirect to="/login" />
+        }}
+      ></Route>
+    )
+  }
+
+export default PrivateRoute

@@ -15,7 +15,7 @@ import { SearchAction } from '../../../redux/Search/SearchAction'
 import { TState } from '../../../redux/Store'
 import { SpanError } from '../../../Component/Form/Form.style'
 import { WrapperSearch } from './Search.style'
-export const SearchScreen = () => {
+ const SearchScreen = () => {
      const { isLoading, error, products, pages } = useSelector((state:TState) => state.Search)
 
   const [page, setPage] = useState(1)
@@ -43,7 +43,7 @@ export const SearchScreen = () => {
 : (
        <Column bg="#FFFFFF">
          <Column bg="#F7F8FC " height={948} mt={23}>
-           <InnerSection mt={23} bg="red">
+           <InnerSection mt={23}>
              <Column item="center">
                <Typography fontSize={32} color="#242424" weight="bold">
                  Search Results...
@@ -56,15 +56,17 @@ export const SearchScreen = () => {
                  {products.length > 0
 ? (
                    products.map((item: any) => (
-                     <CardItem
-                       _id={item._id}
-                       key={item._id}
-                       image={'https://proshop-ms.herokuapp.com/' + item.image}
-                       name={item.name}
-                       rating={item.rating}
-                       price={item.price}
-                       product={item}
-                     />
+                     <>
+                       <CardItem
+                         _id={item._id}
+                         key={item._id}
+                         image={'https://proshop-ms.herokuapp.com/' + item.image}
+                         name={item.name}
+                         rating={item.rating}
+                         price={item.price}
+                         product={item}
+                       />
+                     </>
                    ))
                  )
 : (
@@ -74,7 +76,7 @@ export const SearchScreen = () => {
                  )}
                </WrapperSearch>
              </Row>
-             {page > 1 && page < pages && (
+             {pages > 1 && page < pages && (
                <LoadMore isLoading={isLoading} onClick={() => setPage((prevPage) => prevPage + 1)}>
                  Load More...
                </LoadMore>
@@ -84,3 +86,9 @@ export const SearchScreen = () => {
        </Column>
      )
                               }
+
+
+
+
+
+                              export default SearchScreen

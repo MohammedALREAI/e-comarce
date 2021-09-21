@@ -2,14 +2,16 @@ import { ActionAuth, EnumAuthAction } from './AuthType'
 import IAuthState from './shapeState.interface'
 
 
+const temp = localStorage.getItem('user')
+const user = temp ? JSON.parse(temp) : {}
 
 
 const initialState: IAuthState = {
      user: {
-          _id: '',
-          email: '',
-          token: '',
-          name: '',
+          _id: user ? user._id : '',
+          email: user ? user.email : '',
+          token: user ? user.token : '',
+          name: user ? user.name : '',
      },
      success: false,
      isLoading: false,

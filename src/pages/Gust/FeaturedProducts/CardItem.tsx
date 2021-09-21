@@ -40,7 +40,7 @@ export const CardItem = ({ _id, image, name, price, rating, product, widthBorder
                 <ImageCard src={image} alt={name} />
                 <TitleCard>{name}</TitleCard>
 
-                <Row my={16} JC="center" item="center">
+                <Row my={10} JC="center" item="center">
                     <Rating name="rate" disabled value={rating} size="large" />
                 </Row>
                 <RowPrice>
@@ -53,8 +53,9 @@ export const CardItem = ({ _id, image, name, price, rating, product, widthBorder
                     <PriceCard>${price}</PriceCard>
                     {/* )} */}
                 </RowPrice>
+            </ContainerCard>
             <WrapperRow>
-                <Row width={54} height={62} JC="center" my={20}>
+                <Row width={54} height={62} JC="center">
                     <BockBarkButton aria-label="BookmarkIconS">
                         <BookmarkIcon aria-label="BookmarkIcon" style={style} />
                     </BockBarkButton>
@@ -71,7 +72,6 @@ export const CardItem = ({ _id, image, name, price, rating, product, widthBorder
                     </AddToCartButton>
                 </Row>
             </WrapperRow>
-            </ContainerCard>
 
         </CardContainerWithoutLink>
     )

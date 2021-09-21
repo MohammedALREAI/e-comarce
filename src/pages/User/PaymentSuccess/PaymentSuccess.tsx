@@ -9,7 +9,7 @@ interface Props {
 s?:string
 }
 
-export const PaymentSuccess = (props: Props) => {
+ const PaymentSuccess = (props: Props) => {
     return (
         <Column bg="#FFFFFF">
                  <InnerSection >
@@ -73,3 +73,5 @@ export const PaymentSuccess = (props: Props) => {
             </Column>
     )
 }
+
+export default PaymentSuccess

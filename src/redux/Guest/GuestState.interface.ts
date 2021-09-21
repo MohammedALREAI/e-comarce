@@ -11,7 +11,7 @@ export interface IProduct {
      numReviews: number,
      price: number,
      rating: number,
-     reviews?: Array<Review>,
+     reviews: Array<Review> | [],
      updatedAt: string,
      user: string,
 }
@@ -44,13 +44,3 @@ export interface IGuestState {
 
      }
 }
-
-
-
-// {
-//      products: any[],
-//           page: number,
-//                pages: number,
-//                     isLoading: boolean
-//      error: string
-// }

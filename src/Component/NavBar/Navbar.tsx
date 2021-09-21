@@ -19,16 +19,16 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { useSelector, useDispatch } from 'react-redux'
 import { TState } from '../../redux/Store'
 import IUserState from '../../redux/User/shapeState.interface'
-import { logoutSuccess } from '../../redux/User/UserAction'
+import { AuthActions } from '../../redux/Auth/index'
 import { useHistory } from 'react-router'
+import { useToken } from '../../utils/useToken'
 
 export const Navbar = () => {
      const [value, setValue] = useState < string >('')
      const history = useHistory()
      const user = useSelector((state: TState) => state.user)
   const dispatch = useDispatch()
-  const _id = user.user._id
-  console.log('user is me is  ', _id)
+const token = useToken()
   return (
     <NavContainer>
       <NavInnerSection>
@@ -58,8 +58,8 @@ export const Navbar = () => {
         <NavBox>
           <List>
             <ListNavItem
-              to={_id ? '/profile' : '/login'}
-              title={_id ? 'Profile' : 'Login / Sign up'}
+              to={token ? '/profile' : '/login'}
+              title={token ? 'Profile' : 'Login / Sign up'}
             >
               <PersonIcon style={StyleObj} />
             </ListNavItem>
@@ -68,12 +68,16 @@ export const Navbar = () => {
               <BookmarkIcon style={StyleObj} />
             </ListNavItem>
 
-            {_id && (
+            {token && (
               <>
                 <ListNavItem to="/cart" isBadge={true} countBadge={2} title="Cart">
                   <ShoppingCartIcon style={StyleObj} />
                 </ListNavItem>
-                <ListNavItem to="/" title="logout" onClick={() => dispatch(logoutSuccess())}>
+                <ListNavItem
+                  to="/"
+                  title="logout"
+                  onClick={() => dispatch(AuthActions.logoutSuccess(history))}
+                >
                   <ExitToAppIcon style={StyleObj} />
                 </ListNavItem>
               </>

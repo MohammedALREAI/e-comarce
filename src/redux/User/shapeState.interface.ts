@@ -9,16 +9,11 @@ export interface User {
 
 
 export default interface IUserState {
-     isLoading?: boolean,
-     error?: string,
-     success?: boolean,
-     user: User | any,
-     userProfile?: {
+
+     userProfile: {
           user?: User | any,
-          isLoading?: boolean,
-          success?: boolean,
-          error?: string,
-
-
-     }
+          isLoading: boolean,
+          success: boolean,
+          error: string,
+     },
 }

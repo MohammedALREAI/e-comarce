@@ -1,45 +1,20 @@
-import { TState } from '../Store'
-import { EnumGuestAction } from './GuestType'
+import { useToken } from '../../utils/useToken'
+import axios from '../../utils/Axios'
+import { URL_IMAGES } from './../../Const/env'
+import { EnumGuestAction, GetProductById, FetchImageSlider, FetchFeather } from './GuestType'
 import { Dispatch } from 'redux'
-import axios from 'axios'
-
-const _URL_SLIDER = '/products/top'
-const URL_PRODUCT = '/products'
 
 
-
-// const fetchSliderImage = () => {
-//      return async (dispatch:any) => {
-//           dispatch({
-//                type: EnumGuestAction.GET_SLIDER_IMAGES_START,
-//           })
-
-//           try {
-//                const response = await axios.get(_URL_SLIDER)
-
-//                dispatch({
-//                     type: EnumGuestAction.GET_SLIDER_IMAGES_SUCCESS,
-//                     payload: {
-//                          sliders: response.data,
-//                     },
-//                })
-//           } catch (e: any) {
-//                dispatch({
-//                     type: EnumGuestAction.GET_SLIDER_IMAGES_FILL,
-//                     payload: e?.response?.data?.message,
-//                })
-//           }
-//      }
-// }
-
-
-export const fetchSliderImage = () => async (dispatch: any) => {
+export const fetchSliderImage = () => async (dispatch: Dispatch<FetchImageSlider>) => {
      dispatch({
           type: EnumGuestAction.GET_SLIDER_IMAGES_START,
      })
-
+     const token = useToken()
+     console.log('token', token)
      try {
+          console.log('me fetchSliderImage')
           const response = await axios.get('/products/top')
+
           dispatch({
                type: EnumGuestAction.GET_SLIDER_IMAGES_SUCCESS,
                payload: {
@@ -56,14 +31,15 @@ export const fetchSliderImage = () => async (dispatch: any) => {
 
 
 export const fetchProduct = () => {
-     return async (dispatch: any) => {
+     return async (dispatch: Dispatch<FetchFeather>) => {
+          console.log('the itemis start ')
+
           dispatch({
                type: EnumGuestAction.GET_FEATURED_PRODUCTS_START,
           })
 
           try {
                const response = await axios.get('/products')
-               console.log('the itemis ', response.data.products)
                dispatch({
                     type: EnumGuestAction.GET_FEATURED_PRODUCTS_SUCCESS,
                     payload: {
@@ -80,16 +56,20 @@ export const fetchProduct = () => {
 }
 
 
-export const getProductById = (id: number) => {
-     return async (dispatch: any) => {
+export const getProductById = (id: string) => {
+     return async (dispatch: Dispatch<GetProductById>) => {
           console.log('enter the action here getProductById ')
           dispatch({
                type: EnumGuestAction.GET_PRODUCT_BY_ID_START,
           })
+          console.log('enter the action here getProductById try  ')
 
           try {
-               const response = await axios.get('/products/' + id)
-               console.log('response Data is', response.data)
+               console.log('enter the action here getProductById try axios  ')
+
+               const response = await axios.get(`/products/${id}`)
+               console.log('enter the action here getProductById xxxxxxxxx', response)
+
                dispatch({
                     type: EnumGuestAction.GET_PRODUCT_BY_ID_SUCCESS,
                     payload: { product: response.data },

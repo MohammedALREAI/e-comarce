@@ -39,19 +39,15 @@ export interface orderPlaceFill extends Action<string> {
 
 }
 
-
-
-/**
- * REST Cart
+/***
  *
+ * getOrders =>>>>>>>
  */
-// REST_CART
-
-export interface getOrderStart extends Action<string> {
+export interface getOrdersStart extends Action<string> {
      type: EnumOrderAction.GET_ORDERS_START,
 
 }
-export interface getOrderSuccess extends Action<string> {
+export interface getOrdersSuccess extends Action<string> {
      type: EnumOrderAction.GET_ORDERS_SUCCESS,
      payload: {
           orderItems: OrderItem[]
@@ -59,13 +55,18 @@ export interface getOrderSuccess extends Action<string> {
 
 }
 
-export interface getOrderFill extends Action<string> {
+export interface getOrdersFill extends Action<string> {
      type: EnumOrderAction.GET_ORDERS_FILL,
      payload: {
           error: string
      }
 
 }
+
+
+
+
+export type TGetOrders = getOrdersFill | getOrdersSuccess | getOrdersStart
 export interface restCart extends Action<string> {
      type: EnumOrderAction.REST_CART,
 
@@ -82,14 +83,14 @@ export interface getOrderByIDStart extends Action<string> {
 
 }
 export interface getOrderByIDSuccess extends Action<string> {
-     type: EnumOrderAction.GET_ORDER_BY_ID_START,
+     type: EnumOrderAction.GET_ORDER_BY_ID_SUCCESS,
      payload: {
           order: OrderItem
      }
 
 }
 export interface getOrderByIDFill extends Action<string> {
-     type: EnumOrderAction.GET_ORDER_BY_ID_START,
+     type: EnumOrderAction.GET_ORDER_BY_ID_FILL,
      payload: {
           error: string
      }
@@ -98,20 +99,14 @@ export interface getOrderByIDFill extends Action<string> {
 
 
 
+export type TGetOrderByID = getOrderByIDFill | getOrderByIDSuccess | getOrderByIDStart
 
 
 
 
+export type TPlaceOrder = orderPlaceStart | orderPlaceSuccess | orderPlaceFill | restCart
 
 
 
-export type ActionOrderPlace = orderPlaceStart |
-     orderPlaceSuccess |
-     orderPlaceFill |
-     restCart |
-     getOrderStart |
-     getOrderSuccess |
-     getOrderFill |
-     getOrderByIDStart |
-     getOrderByIDSuccess |
-     getOrderByIDFill
+
+export type ActionOrderPlace = TPlaceOrder | TGetOrders | TGetOrderByID

@@ -1,19 +1,15 @@
 import React, { useEffect } from 'react'
 import { TopRate } from '../TopRate/TopRate'
 import { useDispatch, useSelector } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import {
-  fetchProduct,
   fetchSliderImage,
-  GuestActions,
 } from '../../../redux/Guest/GuestAction'
 import { TState } from '../../../redux/Store'
 import { SpinnerContainer } from '../../../Component/widget/styles'
 import { Slider } from '../../../Component/Slider/slider'
 import { FeaturedProducts } from '../FeaturedProducts/FeaturedProducts'
-import { ProductItem } from '../ProductItem/ProductItem'
 
-export const HomeScreen = () => {
+ const HomeScreen = () => {
   const dispatch = useDispatch()
 
   const state = useSelector((state: TState) => state)
@@ -37,3 +33,6 @@ export const HomeScreen = () => {
     </>
   )
 }
+
+
+export default HomeScreen

@@ -1,8 +1,9 @@
+import { TGetOrders, TGetOrderByID, ActionOrderPlace, EnumOrderAction, TPlaceOrder } from './OrderType'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TState } from './../Store'
-import { ActionOrderPlace, EnumOrderAction } from './OrderType'
+
 import { Dispatch } from 'redux'
-import axios from 'axios'
+import axios from '../../utils/Axios'
 
 import * as H from 'history'
 
@@ -10,12 +11,11 @@ const URL_GET_ORDER = '/orders'
 const URL_GET_ORDERS = '/myorders'
 
 export const placeOrder = (history: H.History<any>) => {
-     return async (dispatch: any, getState: () => TState) => {
+     return async (dispatch: Dispatch<TPlaceOrder>, getState: () => TState) => {
           dispatch({
                type: EnumOrderAction.PLACE_START,
           })
 
-          const token = getState().user.user.token as string
           const cart = getState().cart
 
           try {
@@ -27,15 +27,10 @@ export const placeOrder = (history: H.History<any>) => {
                          .reduce((acc: any, item: any) => acc + item.price * item.quantity, 0)
                          .toFixed(2),
                }
-               const response = await axios.post(URL_GET_ORDER, requestData, {
-                    headers: {
-                         'Content-Type': 'application/json',
-                         Authorization: `Bearer ${token}`,
-                    },
-               })
+               const response = await axios.post('/orders', requestData)
 
                dispatch({
-                    payload: response.data._id,
+                    payload: { _id: response.data._id },
                     type: EnumOrderAction.PLACE_SUCCESS,
                })
                /**w en need to reset  the cart and remove it from cart */
@@ -59,21 +54,14 @@ export const placeOrder = (history: H.History<any>) => {
 
 
 export const getOrders = () => {
-     return async (dispatch: any, getState: () => TState) => {
+     return async (dispatch: Dispatch<TGetOrders>) => {
           try {
                dispatch({
                     type: EnumOrderAction.GET_ORDERS_START,
                })
-               const { user } = getState()
-               const token = user.user.token as string
-               const config = {
-                    headers: {
-                         'Content-Type': 'application/json',
-                         Authorization: `Bearer ${token}`,
-                    },
-               }
 
-               const response = await axios.get(URL_GET_ORDERS, config)
+
+               const response = await axios.get('/orders/myorders')
 
                dispatch({
                     type: EnumOrderAction.GET_ORDERS_SUCCESS,
@@ -84,7 +72,7 @@ export const getOrders = () => {
           } catch (e) {
                dispatch({
                     type: EnumOrderAction.GET_ORDERS_FILL,
-                    payload: e?.response?.data?.message,
+                    payload: { error: e?.response?.data?.message },
                })
           }
      }
@@ -92,30 +80,25 @@ export const getOrders = () => {
 
 
 
-export const getOrderById = (id: string) => async (dispatch: any, getState: () => TState) => {
+export const getOrderById = (id: string) => async (dispatch: Dispatch<TGetOrderByID>) => {
      try {
           dispatch({
                type: EnumOrderAction.GET_ORDER_BY_ID_START,
           })
-          const state = getState()
-          const token = state.user.user.token
 
-          const config = {
-               headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-               },
-          }
 
-          const response = await axios.get(`/orders/${id}`, config)
+
+          const response = await axios.get(`/orders/${id}`)
 
           dispatch({
                type: EnumOrderAction.GET_ORDER_BY_ID_SUCCESS,
-               payload: response.data,
+               payload: { order: response.data },
           })
      } catch (e) {
           dispatch({
-               payload: e?.response?.data?.message,
+               payload: {
+                    error: e?.response?.data?.message,
+               },
                type: EnumOrderAction.GET_ORDER_BY_ID_FILL,
           })
      }

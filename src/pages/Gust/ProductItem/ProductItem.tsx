@@ -12,40 +12,76 @@ import { RightSide } from './RightSide'
 import { ReviewItem } from './ReviewItem'
 import { Column, Row, SpinnerContainer } from '../../../Component/widget/styles'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router'
-import { TState } from '../../../redux/Store'
+import { useLocation, useParams } from 'react-router'
+import { TState, AppDispatch } from '../../../redux/Store'
 import { Navigation } from '../../../Component/Navigation/Navigater'
 import { URL_IMAGES } from '../../../Const/env'
 import { formatDate } from '../../../utils/formatDate'
 import { fetchProduct, getProductById } from '../../../redux/Guest/GuestAction'
 
-export const ProductItem = () => {
+// import { useToken } from '../../../utils/useToken'
+import { ReviewActions } from '../../../redux/Review/ReviewAction'
+
+const ProductItem = () => {
   const dispatch = useDispatch()
   const gust = useSelector((state: TState) => state.gust)
-  const { id } = useParams<{id:string}>()
+  const { product } = gust
+  const state = useSelector((state: TState) => state)
+  const { id } = useParams<{ id: string }>()
+  const search = useLocation().search
+  const reviewFromQuery = (
+    new URLSearchParams(search).get('review') ? new URLSearchParams(search).get('review') : ''
+  ) as string
+  const ratingFromQuery = (
+    new URLSearchParams(search).get('rating') ? new URLSearchParams(search).get('rating') : 0
+  ) as number
+  const [count, setCount] = useState<number>(1)
+  const [rating, setRating] = useState<number>(ratingFromQuery || 0)
+  const [review, setReview] = useState<string>(reviewFromQuery || '')
+  const [error, setError] = useState<string>('')
+
   useEffect(() => {
-    console.log('ssssssssssssssssss45454mm')
-    dispatch(getProductById(Number(id)))
-  }, [])
+    console.log('enter to this seeee+')
 
-  console.log('ther p', gust.product?.isLoading || gust?.product?.product?.isLoading)
+       dispatch(fetchProduct())
+  dispatch(getProductById(id))
+  }, [dispatch, id])
 
-  return gust.product?.isLoading || gust?.product?.product?.isLoading
+  useEffect(() => {
+    if (state.review?.success) {
+      const data = {
+        comment: review,
+        rating,
+        createdAt: formatDate(new Date().toString()),
+        name: state.auth.user?.name,
+      }
+
+      dispatch(ReviewActions.addReview(data, id))
+      setError('')
+      setReview('')
+      setRating(0)
+    }
+  }, [dispatch, rating, review, state.review?.success, state?.auth.user.name])
+
+  //   type pr = ReturnType<typeof product.product.product >
+  console.log('the  product item is ', product.product)
+
+  return product.product.isLoading && !product.product.product
 ? (
     <SpinnerContainer />
   )
 : (
     <Column bg="#FFFFFF" height={948}>
       <InnerSectionWrapper>
-        <Navigation title={gust.product.product.product.name} />
+        <Navigation title={product.product?.product?.brand + ''} />
         <Row mt={62}>
           <LeftContainer>
-            <LeftSide image={URL_IMAGES + gust.product.product.image} />
+            <LeftSide image={`${URL_IMAGES}${product?.product?.product?.image}`} />
           </LeftContainer>
           <RightContainer>
-            <RightSide product={gust.product.product} count={1} />
+            <RightSide product={product!.product!.product!} count={1} />
           </RightContainer>
         </Row>
         <Column mt={63}>
@@ -66,42 +102,48 @@ export const ProductItem = () => {
                     <TextRow>Brand :</TextRow>
                   </Row>
                   <Row>
-                    <TextRow>{gust.product.product.brand} </TextRow>
+                    <TextRow>{product?.product?.product?.brand} </TextRow>
                   </Row>
                 </HalfRow>
                 <HalfRow isHover={false}>
                   <Row>category:</Row>
-                  <Row>{gust.product.product.category}</Row>
+                  <Row>{product?.product?.product?.category}</Row>
                 </HalfRow>
               </Row>
             </Column>
           </SpecificationSection>
-          {gust.product.product.reviews?.length > 0 && (
-            <>
-              <TextTitle
-                style={{
-                  marginTop: '63px',
-                  marginBottom: '31px',
-                }}
-              >
-                Reviews
-              </TextTitle>
-              <SpecificationSection style={{ padding: '30px 50px' }}>
-                {gust.product.product.reviews.length &&
-                  gust.product.product.reviews.map((review: any) => (
-                    <ReviewItem
-                      key={review._id}
-                      title={review.name}
-                      text={review.comment}
-                      date={formatDate(review.createdAt)}
-                      rate={review}
-                    />
-                  ))}
-              </SpecificationSection>
-            </>
-          )}
+          {product &&
+            product.product &&
+            product.product.product &&
+            product.product.product.reviews &&
+            product.product.product.reviews.length > 0 && (
+              <>
+                <TextTitle
+                  style={{
+                    marginTop: '63px',
+                    marginBottom: '31px',
+                  }}
+                >
+                  Reviews
+                </TextTitle>
+                <SpecificationSection style={{ padding: '30px 50px' }}>
+                  {product.product.product?.reviews?.length &&
+                    product.product.product.reviews.map((review: any) => (
+                      <ReviewItem
+                        key={review._id}
+                        title={review.name}
+                        text={review.comment}
+                        date={formatDate(review.createdAt)}
+                        rate={review}
+                      />
+                    ))}
+                </SpecificationSection>
+              </>
+            )}
         </Column>
       </InnerSectionWrapper>
     </Column>
   )
 }
+
+export default ProductItem

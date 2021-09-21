@@ -1,13 +1,13 @@
-// import { Dispatch } from 'redux'
-import axios from 'axios'
-import { EnumFeatherProductAction } from './FeatuerPorductType'
+import { Dispatch } from 'redux'
+import axios from '../../utils/Axios'
+import { EnumFeatherProductAction, ActionFetchFeather } from './FeatuerPorductType'
 
 const URL_PRODUCT = '/products'
 
 
 
 export const fetchProduct = () => {
-     return async (dispatch: any) => {
+     return async (dispatch: Dispatch<ActionFetchFeather>) => {
           dispatch({
                type: EnumFeatherProductAction.GET_FEATURED_PRODUCTS_START,
           })

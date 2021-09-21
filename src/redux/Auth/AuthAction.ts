@@ -1,7 +1,7 @@
-import { SignupAction } from './../User/userType'
+import { URL_IMAGES } from './../../Const/env'
 import { schemaValidationSignUpType, schemaValidationLoginType } from '../../utils/validation'
 import { Dispatch } from 'redux'
-import axios from 'axios'
+import axios from '../../utils/Axios'
 import { EnumAuthAction, TLoginAction, TLogoutAction, TSignupAction } from './AuthType'
 
 import * as H from 'history'
@@ -9,6 +9,7 @@ import * as H from 'history'
 
 export const loginAction = (userData: schemaValidationLoginType, history: H.History<any>) => {
      return async (dispatch: Dispatch<TLoginAction>) => {
+          console.log(dispatch)
           dispatch({
                type: EnumAuthAction.USER_LOGIN_START,
           })
@@ -16,6 +17,7 @@ export const loginAction = (userData: schemaValidationLoginType, history: H.Hist
           try {
                const response = await axios.post('/users/login', userData)
                localStorage.setItem('user', JSON.stringify(response.data))
+               console.log('ther response is login', response)
 
                dispatch({
                     type: EnumAuthAction.USER_LOGIN_SUCCESS,
@@ -37,11 +39,6 @@ export const loginAction = (userData: schemaValidationLoginType, history: H.Hist
 
 
 
-/**
- * singUpSuccess
- * @param data
- * @returns
- */
 export const singUpSuccess = (data: schemaValidationSignUpType, history: H.History<any>) => {
      return async (dispatch: Dispatch<TSignupAction>) => {
           dispatch({
@@ -70,10 +67,11 @@ export const singUpSuccess = (data: schemaValidationSignUpType, history: H.Histo
           }
      }
 }
-export const logoutSuccess = () => {
+export const logoutSuccess = (history: H.History<any>) => {
      return (dispatch: Dispatch<TLogoutAction>) => {
           dispatch({ type: EnumAuthAction.USER_LOGOUT })
           localStorage.removeItem('user')
+          history.push('/login')
      }
 }
 

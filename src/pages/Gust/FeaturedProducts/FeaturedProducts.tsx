@@ -41,14 +41,10 @@ export const FeaturedProducts = () => {
   const fetchFeathers = useSelector((state: TState) => state.fetchFeathers)
 
   useEffect(() => {
+       console.log('enter')
     dispatch(fetchProduct())
   }, [dispatch])
 
-//   const SliceArrayMe: any = SliceArray(fetchFeathers?.products, chunkSize)
-
-//   console.log('the slice array beforememememem', SliceArrayMe.length)
-//   const sliderData:any = []
-//   const len = SliceArrayMe.length
 
   const handleChangeIndex = () => console.log('change index')
 

@@ -7,15 +7,11 @@ import {
 } from '../../../Component/widget/styles'
 import CARD from '../../../Assets/Images/card.png'
 import { RowWithRadius } from '../../Gust/TopRate/style'
-import { CardItem } from '../../Gust/FeaturedProducts/CardItem'
 import { Navigation } from '../../../Component/Navigation/Navigater'
 import { useSelector, useDispatch } from 'react-redux'
 import { TState } from '../../../redux/Store'
-interface Props {
-  me?: string;
-}
 
-export const ShoppingCart = (props: Props) => {
+ const ShoppingCart = () => {
   const state = useSelector((state: TState) => state.cart)
   const dispatch = useDispatch()
   return (
@@ -57,3 +53,5 @@ export const ShoppingCart = (props: Props) => {
     </Column>
   )
 }
+
+export default ShoppingCart

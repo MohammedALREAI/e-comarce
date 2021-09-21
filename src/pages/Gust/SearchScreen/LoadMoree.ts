@@ -8,6 +8,7 @@ export const LoadMore = styled(Row)<{isLoading?:boolean}>`
   font-size: 18px;
   height: 50px;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin: 20px 0px;
   width: 200px;
+
 `
